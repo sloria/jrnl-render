@@ -1,31 +1,40 @@
-2020-05-02 15:30 How to fly
+2020-05-01 09:42 Setting up jrnl-render
 
-@TIL how to fly using a single line of code:
+Just create an HTML file with a `<jrnl>` tag and include the 
+standalone `jrnl-render` script:
 
-```python
-import antigravity
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>My JRNL</title>
+  </head>
+  <body>
+    <!-- CHANGEME: Use your own URL here -->
+    <jrnl src="https://dl.dropboxusercontent.com/s/abcdef1234/jrnl.txt?dl=0" />
+    <script src="https://unpkg.com/jrnl-render/dist/jrnl-render.standalone.min.js"></script>
+  </body>
+</html>
 ```
 
-@python
+That's it!
 
-2020-08-10 03:22 .babelrc files can include comments
+2020-05-02 15:30 What is jrnl-render?
 
-.babelrc are serialized to [json5](https://json5.org/), so you
-can use comments in them
+jrnl-render is a JavaScript file that renders your jrnl files to
+a webpage.
+
+Features:
+
+* Extremely easy to set up
+* Renders GitHub-flavored Markdown
+* Syntax highlighting
+* Filtering and tag support, e.g. @javascript
 
 
-```javascript
-{
-  // Don't convert modules to CommonJS
-  // Let rollup do its thing.
-  // https://rollupjs.org/guide/en#babel
-  "presets": [
-    ["env", {
-      "modules": false
-    }],
-    "react"
-  ]
-}
-```
+2020-08-10 03:22 What is jrnl?
 
-@javascript
+jrnl is a simple journal application for your command line. Journals are stored as human readable plain text files - you can put them into a Dropbox folder for instant syncing and you can be assured that your journal will still be readable in 2050, when all your fancy iPad journal applications will long be forgotten.
+
+http://jrnl.sh/

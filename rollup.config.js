@@ -26,10 +26,9 @@ if (standalone) {
     format: "iife"
   };
   config.plugins.push(
-    nodeResolve({ extensions: [".js", ".jsx", ".json"] }),
+    nodeResolve(),
     replace({
       "process.env.NODE_ENV": JSON.stringify(env)
-      // global: "window"
     }),
     commonjs()
   );
@@ -40,7 +39,18 @@ if (standalone) {
     format: "umd",
     globals: { react: "React", "react-dom": "ReactDOM" }
   };
-  config.external = ["react", "react-dom"];
+  config.external = [
+    "react",
+    "react-dom",
+    "jrnl-parse",
+    "slugify",
+    "prop-types",
+    "remark",
+    "remark-ping",
+    "remark-rehype",
+    "rehype-stringify",
+    "rehype-highlight"
+  ];
 }
 
 config.plugins.push(

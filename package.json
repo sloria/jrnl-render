@@ -6,7 +6,7 @@
   "main": "dist/jrnl-render.js",
   "scripts": {
     "build:standalone": "NODE_ENV=development STANDALONE=true rollup -c -o dist/jrnl-render.standalone.js",
-    "build:standalone:min": "NODE_ENV=production STANDALONE=true rollup -c -o dist/jrnl-render.standalone.js",
+    "build:standalone:min": "NODE_ENV=production STANDALONE=true rollup -c -o dist/jrnl-render.standalone.min.js",
     "build:umd": "NODE_ENV=development rollup -c -o dist/jrnl-render.js",
     "build:umd:min": "NODE_ENV=production rollup -c -o dist/jrnl-render.min.js",
     "build": "npm-run-all --parallel build:umd build:umd:min build:standalone build:standalone:min",

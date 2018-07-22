@@ -1,11 +1,11 @@
-import parse from "jrnl-parser";
+import parse from "jrnl-parse";
 import slugify from "slugify";
 import React from "react";
 import t from "prop-types";
 
 import getQueryParam from "./get-query-param";
 import fetchTxt from "./fetch-txt";
-import Markdown from "./Markdown";
+import Markdown from "./Markdown.jsx";
 
 const EntryBody = ({ body, onClickTag }) => (
   <div className="Markdown f6 f5-l lh-copy">
@@ -149,9 +149,13 @@ export default class App extends React.Component {
   componentDidMount() {
     const filter = getQueryParam("q") || "";
     this.setState({ filter, loaded: false });
-    fetchTxt(this.props.src).then(source => {
-      this.setState({ source, loaded: true });
-    });
+    if (this.props.src.trim().startsWith("http://")) {
+      fetchTxt(this.props.src).then(source => {
+        this.setState({ source, loaded: true });
+      });
+    } else {
+      this.setState({ source: this.props.src });
+    }
   }
   render() {
     return (
