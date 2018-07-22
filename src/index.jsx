@@ -56,6 +56,36 @@ const Empty = () => (
   <p className="code gray">No entries to show. Try a different search.</p>
 );
 
+const SearchInput = props => (
+  <input
+    className="code f7 input-reset pa2 br2 ba b--black-20 bg-white animated-shadow"
+    {...props}
+  />
+);
+
+const Header = ({ title, onInputChange, filter }) => (
+  <header className="flex mt5 mb3 mw8 center">
+    <h2 className="f4 mv0 pa2">
+      <a className="no-underline black dim" href="/">
+        {title || "JRNL"}
+      </a>
+    </h2>
+    <div className="flex-auto" />
+    <nav className="tc lh-title flex mb1">
+      <SearchInput
+        placeholder="Search..."
+        onChange={onInputChange}
+        value={filter}
+      />
+    </nav>
+  </header>
+);
+Header.propTypes = {
+  title: t.string,
+  onInputChange: t.function,
+  filter: t.string
+};
+
 const JRNL = ({ title, source, loaded, filter, onInputChange, onClickTag }) => {
   const parsed = source ? parse(source) : [];
   // Show entries in reverse chronological order
@@ -66,25 +96,22 @@ const JRNL = ({ title, source, loaded, filter, onInputChange, onClickTag }) => {
     );
   }
   return (
-    <section className="mw7 center sans-serif">
-      <h2 className="avenir fw4 ph3 ph0-l">
-        <a className="no-underline black dim" href="/">
-          {title || "JRNL"}
-        </a>
-      </h2>
-      <input onChange={onInputChange} value={filter} />
-      {loaded ? (
-        entries.length ? (
-          entries.map((entry, i) => (
-            <Entry key={i} entry={entry} onClickTag={onClickTag} />
-          ))
+    <div className="mw7 center sans-serif">
+      <Header title={title} onInputChange={onInputChange} filter={filter} />
+      <section>
+        {loaded ? (
+          entries.length ? (
+            entries.map((entry, i) => (
+              <Entry key={i} entry={entry} onClickTag={onClickTag} />
+            ))
+          ) : (
+            <Empty />
+          )
         ) : (
-          <Empty />
-        )
-      ) : (
-        <Loader />
-      )}
-    </section>
+          <Loader />
+        )}
+      </section>
+    </div>
   );
 };
 JRNL.propTypes = {
@@ -114,8 +141,6 @@ export default class App extends React.Component {
   }
   handleClickTag(tag) {
     this.setState({ filter: tag });
-    console.log("clicked tag");
-    console.log(tag);
   }
   componentDidMount() {
     this.setState({ loaded: false });
