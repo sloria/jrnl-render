@@ -1,28 +1,19 @@
 import parse from "jrnl-parser";
-import Markdown from "react-markdown";
 import React from "react";
 import t from "prop-types";
 
-import CodeBlock from "./CodeBlock.jsx";
+import getQueryParam from "./get-query-param";
 import fetchTxt from "./fetch-txt";
-import remarkTags, { Ping } from "./remark-tags";
+import Markdown from "./Markdown";
 
 const EntryBody = ({ body, onClickTag }) => (
   <p className="f6 f5-l lh-copy">
-    <Markdown
-      source={body}
-      renderers={{ code: CodeBlock, ping: Ping }}
-      astPlugins={[
-        remarkTags({
-          onClick: onClickTag
-        })
-      ]}
-    />
+    <Markdown source={body} tagURL={tag => `?q=@${tag}`} />
   </p>
 );
 EntryBody.propTypes = {
   body: t.string,
-  onClickTag: t.function
+  onClickTag: t.func
 };
 
 const EntryContainer = ({ date, children }) => (
@@ -49,7 +40,7 @@ const Entry = ({ entry, onClickTag }) => (
 );
 Entry.propTypes = {
   entry: t.object,
-  onClickTag: t.function
+  onClickTag: t.func
 };
 
 const Loader = () => <div className="tc ma6 code gray">Loading entries…</div>;
@@ -84,7 +75,7 @@ const Header = ({ title, onInputChange, filter }) => (
 );
 Header.propTypes = {
   title: t.string,
-  onInputChange: t.function,
+  onInputChange: t.func,
   filter: t.string
 };
 
@@ -121,8 +112,8 @@ JRNL.propTypes = {
   source: t.string,
   loaded: t.bool,
   filter: t.string,
-  onInputChange: t.function,
-  onClickTag: t.function
+  onInputChange: t.func,
+  onClickTag: t.func
 };
 
 export default class App extends React.Component {
@@ -145,7 +136,8 @@ export default class App extends React.Component {
     this.setState({ filter: tag });
   }
   componentDidMount() {
-    this.setState({ loaded: false });
+    const filter = getQueryParam("q") || "";
+    this.setState({ filter, loaded: false });
     fetchTxt(this.props.src).then(source => {
       this.setState({ source, loaded: true });
     });

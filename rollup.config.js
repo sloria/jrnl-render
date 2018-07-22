@@ -48,7 +48,7 @@ config.plugins.push(
     // Needed for rollup: https://rollupjs.org/guide/en#babel
     // NOTE: this gets merged with .babelrc
     plugins: ["external-helpers"],
-    exclude: ["**/*.json"]
+    exclude: ["**/*.json", "node_modules/**"]
   }),
   nodeBuiltins(),
   nodeGlobals(),

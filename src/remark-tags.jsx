@@ -9,13 +9,8 @@ import React from "react";
 import visit from "unist-util-visit";
 import t from "prop-types";
 
-export const Ping = ({ value, onClick }) => {
-  const handleClick = e => onClick(value, e);
-  return (
-    <a onClick={handleClick} href="#">
-      {value}
-    </a>
-  );
+export const Ping = ({ value }) => {
+  return <a href="#">{value}</a>;
 };
 Ping.propTypes = {
   value: t.string,

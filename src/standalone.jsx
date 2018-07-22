@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./index.jsx";
 import "tachyons";
+import "highlight.js/styles/github.css";
 
 function autoInit() {
   const elem = document.querySelector("jrnl");

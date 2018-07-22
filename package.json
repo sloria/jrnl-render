@@ -52,8 +52,6 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-markdown": "^3.3.4",
-    "react-syntax-highlighter": "^8.0.1",
     "rimraf": "^2.6.1",
     "rollup": "^0.63.3",
     "rollup-plugin-babel": "^3.0.3",
@@ -73,9 +71,8 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "prop-types": "^15.6.2",
-    "react-markdown": "^3.3.4",
-    "react-syntax-highlighter": "^8.0.1",
-    "tachyons": "^4.11.0"
+    "tachyons": "^4.11.0",
+    "highlight.js": "^9.12.0"
   },
   "browserslist": [
     "IE >= 11"
@@ -92,5 +89,11 @@
       "git add"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "rehype-highlight": "^2.1.0",
+    "rehype-stringify": "^4.0.0",
+    "remark": "^9.0.0",
+    "remark-ping": "^2.1.2",
+    "remark-rehype": "^3.0.0"
+  }
 }
