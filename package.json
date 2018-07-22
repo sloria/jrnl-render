@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Render a jrnl (jrnl.sh) file as a webpage.",
   "browser": "dist/jrnl-render.standalone.js",
+  "unpkg": "dist/jrnl-render.standalone.min.js",
   "main": "dist/jrnl-render.js",
   "scripts": {
     "build:standalone": "NODE_ENV=development STANDALONE=true rollup -c -o dist/jrnl-render.standalone.js",
