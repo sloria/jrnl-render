@@ -4,4 +4,4 @@
 <!-- [![Build Status](https://travis-ci.org/sloria/jrnl-render.svg?branch=master)](https://travis-ci.org/sloria/jrnl-render) -->
 <!-- [![Greenkeeper badge](https://badges.greenkeeper.io/sloria/jrnl-render.svg)](https://greenkeeper.io/) -->
 
-Renders [jrnl](https://jrnl.sh) files as a webpage.
+Renders [jrnl](http://jrnl.sh) files as a webpage.
