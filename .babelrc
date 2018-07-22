@@ -1,0 +1,25 @@
+{
+  // Don't convert modules to CommonJS
+  // Let rollup do its thing.
+  // https://rollupjs.org/guide/en#babel
+  "presets": [
+    ["env", {
+      "modules": false
+    }],
+    "react"
+  ],
+  // Overrides for Jest
+  // Jest runs in node, so transpile
+  // imports to requires
+  "env": {
+    "test": {
+      "presets": [
+        ["env", {
+          "targets": {
+            "node": "current"
+          }
+        }]
+      ]
+    }
+  }
+}

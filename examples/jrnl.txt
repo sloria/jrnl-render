@@ -1,0 +1,31 @@
+2020-05-02 15:30 How to fly
+
+@TIL how to fly using a single line of code:
+
+```python
+import antigravity
+```
+
+@python
+
+2020-08-10 03:22 .babelrc files can include comments
+
+.babelrc are serialized to [json5](https://json5.org/), so you
+can use comments in them
+
+
+```javascript
+{
+  // Don't convert modules to CommonJS
+  // Let rollup do its thing.
+  // https://rollupjs.org/guide/en#babel
+  "presets": [
+    ["env", {
+      "modules": false
+    }],
+    "react"
+  ]
+}
+```
+
+@javascript

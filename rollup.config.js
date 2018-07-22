@@ -1,0 +1,67 @@
+import { resolve } from "path";
+
+import serve from "rollup-plugin-serve";
+import json from "rollup-plugin-json";
+import nodeBuiltins from "rollup-plugin-node-builtins";
+import nodeResolve from "rollup-plugin-node-resolve";
+import nodeGlobals from "rollup-plugin-node-globals";
+import { uglify } from "rollup-plugin-uglify";
+import babel from "rollup-plugin-babel";
+import filesize from "rollup-plugin-filesize";
+import commonjs from "rollup-plugin-commonjs";
+import replace from "rollup-plugin-replace";
+import postcss from "rollup-plugin-postcss";
+
+const env = process.env.NODE_ENV;
+const standalone = process.env.STANDALONE == "true";
+const umdName = "jrnl";
+const config = {
+  plugins: [postcss()]
+};
+
+if (standalone) {
+  config.input = resolve("src", "standalone.jsx");
+  config.output = {
+    name: umdName,
+    format: "iife"
+  };
+  config.plugins.push(
+    nodeResolve(),
+    replace({
+      "process.env.NODE_ENV": JSON.stringify(env)
+      // global: "window"
+    }),
+    commonjs()
+  );
+} else {
+  config.input = resolve("src", "index.jsx");
+  config.output = {
+    name: umdName,
+    format: "umd",
+    globals: { react: "React", "react-dom": "ReactDOM" }
+  };
+  config.external = ["react", "react-dom"];
+}
+
+config.plugins.push(
+  babel({
+    // Needed for rollup: https://rollupjs.org/guide/en#babel
+    // NOTE: this gets merged with .babelrc
+    plugins: ["external-helpers"],
+    exclude: ["**/*.json"]
+  }),
+  nodeBuiltins(),
+  nodeGlobals(),
+  json()
+);
+
+if (env === "production") {
+  config.plugins.push(uglify());
+}
+
+if (process.env.SERVE === "true") {
+  config.plugins.push(serve({ contentBase: ["dist", "examples"], open: true }));
+}
+
+config.plugins.push(filesize());
+export default config;
