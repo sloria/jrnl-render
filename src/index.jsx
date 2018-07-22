@@ -1,4 +1,5 @@
 import parse from "jrnl-parser";
+import slugify from "slugify";
 import React from "react";
 import t from "prop-types";
 
@@ -16,28 +17,38 @@ EntryBody.propTypes = {
   onClickTag: t.func
 };
 
-const EntryContainer = ({ date, children }) => (
-  <article className="bt bb b--black-10">
+const formatDate = date => date.toISOString().slice(0, 10); // 2020-02-23
+const makeSlug = entry =>
+  `${formatDate(entry.date)}-${slugify(entry.title, { lower: true })}`;
+
+const EntryContainer = ({ slug, date, children }) => (
+  <article id={slug} className="bt bb b--black-10">
     <div className="db pv5 ph3 ph0-l">
       <div className="flex flex-column flex-row-ns">
         <div className="w-100">{children}</div>
       </div>
     </div>
-    <time className="f7 code mb2 db gray">{formatDate(date)}</time>
+    <time className="f7 code mb2 db">
+      <a className="gray dim no-underline" title={slug} href={`#${slug}`}>
+        {formatDate(date)}
+      </a>
+    </time>
   </article>
 );
 EntryContainer.propTypes = {
   children: t.array,
-  date: t.instanceOf(Date)
+  date: t.instanceOf(Date).isRequired,
+  slug: t.string.isRequired
 };
-const formatDate = date => date.toISOString().slice(0, 10); // 2020-02-23
-
-const Entry = ({ entry, onClickTag }) => (
-  <EntryContainer date={entry.date}>
-    <h1 className="f3 fw7 mt0 lh-title">{entry.title}</h1>
-    <EntryBody body={entry.body} onClickTag={onClickTag} />
-  </EntryContainer>
-);
+const Entry = ({ entry, onClickTag }) => {
+  const slug = makeSlug(entry);
+  return (
+    <EntryContainer slug={slug} date={entry.date}>
+      <h1 className="f3 fw7 mt0 lh-title">{entry.title}</h1>
+      <EntryBody body={entry.body} onClickTag={onClickTag} />
+    </EntryContainer>
+  );
+};
 Entry.propTypes = {
   entry: t.object,
   onClickTag: t.func
