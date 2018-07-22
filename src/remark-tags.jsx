@@ -22,14 +22,16 @@ Ping.propTypes = {
   onClick: t.function
 };
 
+const TAG_REGEX = /@(?:\*\*([^*]+)\*\*|(\w+))/;
+
 export default function tags({ onClick }) {
   function transformer(tree) {
-    visit(tree, "text", function(node, index, parent) {
-      if (parent.type !== "link" && /@[a-z-.]+/.test(node.value)) {
+    visit(tree, "text", (node, index, parent) => {
+      if (parent.type !== "link" && TAG_REGEX.test(node.value)) {
         parent.children[index] = {
           type: "ping",
           value: node.value,
-          onClick: onClick.bind(node.value),
+          onClick: onClick,
           children: [node],
           position: node.position
         };

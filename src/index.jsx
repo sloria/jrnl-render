@@ -25,25 +25,26 @@ EntryBody.propTypes = {
   onClickTag: t.function
 };
 
-const EntryContainer = ({ children }) => (
+const EntryContainer = ({ date, children }) => (
   <article className="bt bb b--black-10">
-    <div className="db pv4 ph3 ph0-l black">
+    <div className="db pv5 ph3 ph0-l">
       <div className="flex flex-column flex-row-ns">
         <div className="w-100">{children}</div>
       </div>
     </div>
+    <time className="f7 code mb2 db gray">{formatDate(date)}</time>
   </article>
 );
 EntryContainer.propTypes = {
-  children: t.array
+  children: t.array,
+  date: t.instanceOf(Date)
 };
 const formatDate = date => date.toISOString().slice(0, 10); // 2020-02-23
 
 const Entry = ({ entry, onClickTag }) => (
-  <EntryContainer>
-    <h1 className="f3 fw7 avenir mt0 lh-title">{entry.title}</h1>
+  <EntryContainer date={entry.date}>
+    <h1 className="f3 fw7 mt0 lh-title">{entry.title}</h1>
     <EntryBody body={entry.body} onClickTag={onClickTag} />
-    <time className="f6 db gray">{formatDate(entry.date)}</time>
   </EntryContainer>
 );
 Entry.propTypes = {
@@ -51,7 +52,7 @@ Entry.propTypes = {
   onClickTag: t.function
 };
 
-const Loader = () => <p className="code gray">Loading…</p>;
+const Loader = () => <div className="tc ma6 code gray">Loading entries…</div>;
 const Empty = () => (
   <p className="code gray">No entries to show. Try a different search.</p>
 );
@@ -64,15 +65,16 @@ const SearchInput = props => (
 );
 
 const Header = ({ title, onInputChange, filter }) => (
-  <header className="flex mt5 mb3 mw8 center">
-    <h2 className="f4 mv0 pa2">
-      <a className="no-underline black dim" href="/">
+  <header className="flex mt4 mb3 mw8 center">
+    <h2 className="f4 mv0 pv2">
+      <a className="no-underline dim near-black" href="/">
         {title || "JRNL"}
       </a>
     </h2>
     <div className="flex-auto" />
     <nav className="tc lh-title flex mb1">
       <SearchInput
+        autoFocus
         placeholder="Search..."
         onChange={onInputChange}
         value={filter}
@@ -96,7 +98,7 @@ const JRNL = ({ title, source, loaded, filter, onInputChange, onClickTag }) => {
     );
   }
   return (
-    <div className="mw7 center sans-serif">
+    <div className="mw7 center sans-serif near-black">
       <Header title={title} onInputChange={onInputChange} filter={filter} />
       <section>
         {loaded ? (
