@@ -1,0 +1,6 @@
+.Markdown a {
+  color: #001b44; /* navy */
+}
+.Markdown a:hover {
+  color: #137752; /* dark-green */
+}

@@ -8,9 +8,9 @@ import fetchTxt from "./fetch-txt";
 import Markdown from "./Markdown";
 
 const EntryBody = ({ body, onClickTag }) => (
-  <p className="f6 f5-l lh-copy">
+  <div className="Markdown f6 f5-l lh-copy">
     <Markdown source={body} tagURL={tag => `?q=@${tag}`} />
-  </p>
+  </div>
 );
 EntryBody.propTypes = {
   body: t.string,
@@ -61,7 +61,7 @@ const Empty = () => (
 
 const SearchInput = props => (
   <input
-    className="code f7 input-reset pa2 br2 ba b--black-20 bg-white animated-shadow"
+    className="code f7 input-reset pa2 br2 ba b--black-20 bg-white hover-dark-green animated-shadow"
     {...props}
   />
 );
@@ -69,19 +69,19 @@ const SearchInput = props => (
 const Header = ({ title, onInputChange, filter }) => (
   <header className="flex mt4 mb3 mw8 center">
     <h2 className="f4 mv0 pv2">
-      <a className="no-underline dim near-black" href="/">
+      <a className="no-underline hover-dark-pink near-black" href="/">
         {title || "JRNL"}
       </a>
     </h2>
     <div className="flex-auto" />
-    <nav className="tc lh-title flex mb1">
+    <div className="tc lh-title flex mb1">
       <SearchInput
         autoFocus
         placeholder="Search..."
         onChange={onInputChange}
         value={filter}
       />
-    </nav>
+    </div>
   </header>
 );
 Header.propTypes = {
