@@ -4,36 +4,25 @@ import React from "react";
 import t from "prop-types";
 
 import CodeBlock from "./CodeBlock.jsx";
+import fetchTxt from "./fetch-txt";
+import remarkTags, { Ping } from "./remark-tags";
 
-function fetchTxt(url) {
-  function checkStatus(response) {
-    if (response.status >= 200 && response.status < 300) {
-      return response;
-    }
-    const error = new Error(response.statusText);
-    error.response = response;
-    throw error;
-  }
-  function parseText(response) {
-    return response.text();
-  }
-
-  return fetch(url, {
-    headers: {
-      "Content-Type": "text/plain"
-    }
-  })
-    .then(checkStatus)
-    .then(parseText);
-}
-
-const EntryBody = ({ body }) => (
+const EntryBody = ({ body, onClickTag }) => (
   <p className="f6 f5-l lh-copy">
-    <Markdown source={body} renderers={{ code: CodeBlock }} />
+    <Markdown
+      source={body}
+      renderers={{ code: CodeBlock, ping: Ping }}
+      astPlugins={[
+        remarkTags({
+          onClick: onClickTag
+        })
+      ]}
+    />
   </p>
 );
 EntryBody.propTypes = {
-  body: t.string
+  body: t.string,
+  onClickTag: t.function
 };
 
 const EntryContainer = ({ children }) => (
@@ -50,15 +39,16 @@ EntryContainer.propTypes = {
 };
 const formatDate = date => date.toISOString().slice(0, 10); // 2020-02-23
 
-const Entry = ({ entry }) => (
+const Entry = ({ entry, onClickTag }) => (
   <EntryContainer>
     <h1 className="f3 fw7 avenir mt0 lh-title">{entry.title}</h1>
-    <EntryBody body={entry.body} />
+    <EntryBody body={entry.body} onClickTag={onClickTag} />
     <time className="f6 db gray">{formatDate(entry.date)}</time>
   </EntryContainer>
 );
 Entry.propTypes = {
-  entry: t.object
+  entry: t.object,
+  onClickTag: t.function
 };
 
 const Loader = () => <p className="code gray">Loading…</p>;
@@ -66,8 +56,9 @@ const Empty = () => (
   <p className="code gray">No entries to show. Try a different search.</p>
 );
 
-const JRNL = ({ title, source, loaded, filter, onInputChange }) => {
+const JRNL = ({ title, source, loaded, filter, onInputChange, onClickTag }) => {
   const parsed = source ? parse(source) : [];
+  // Show entries in reverse chronological order
   let entries = parsed.reverse();
   if (filter) {
     entries = entries.filter(
@@ -76,12 +67,17 @@ const JRNL = ({ title, source, loaded, filter, onInputChange }) => {
   }
   return (
     <section className="mw7 center sans-serif">
-      {/* TODO: Customizable title */}
-      <h2 className="avenir fw1 ph3 ph0-l">{title || "JRNL"}</h2>
-      <input onChange={onInputChange} />
+      <h2 className="avenir fw4 ph3 ph0-l">
+        <a className="no-underline black dim" href="/">
+          {title || "JRNL"}
+        </a>
+      </h2>
+      <input onChange={onInputChange} value={filter} />
       {loaded ? (
         entries.length ? (
-          entries.map((entry, i) => <Entry key={i} entry={entry} />)
+          entries.map((entry, i) => (
+            <Entry key={i} entry={entry} onClickTag={onClickTag} />
+          ))
         ) : (
           <Empty />
         )
@@ -96,7 +92,8 @@ JRNL.propTypes = {
   source: t.string,
   loaded: t.bool,
   filter: t.string,
-  onInputChange: t.function
+  onInputChange: t.function,
+  onClickTag: t.function
 };
 
 export default class App extends React.Component {
@@ -104,14 +101,21 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       // TODO: loading indicator
+      // TODO: Error state
       loaded: true,
       source: null,
       filter: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleClickTag = this.handleClickTag.bind(this);
   }
   handleInputChange(e) {
     this.setState({ filter: e.target.value });
+  }
+  handleClickTag(tag) {
+    this.setState({ filter: tag });
+    console.log("clicked tag");
+    console.log(tag);
   }
   componentDidMount() {
     this.setState({ loaded: false });
@@ -127,6 +131,7 @@ export default class App extends React.Component {
         source={this.state.source}
         filter={this.state.filter}
         onInputChange={this.handleInputChange}
+        onClickTag={this.handleClickTag}
       />
     );
   }

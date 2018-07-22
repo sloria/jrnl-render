@@ -26,7 +26,7 @@ if (standalone) {
     format: "iife"
   };
   config.plugins.push(
-    nodeResolve(),
+    nodeResolve({ extensions: [".js", ".jsx", ".json"] }),
     replace({
       "process.env.NODE_ENV": JSON.stringify(env)
       // global: "window"
