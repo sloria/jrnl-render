@@ -41,9 +41,8 @@ EntryContainer.propTypes = {
   slug: t.string.isRequired
 };
 const Entry = ({ entry, onClickTag }) => {
-  const slug = makeSlug(entry);
   return (
-    <EntryContainer slug={slug} date={entry.date}>
+    <EntryContainer slug={entry.slug} date={entry.date}>
       <h1 className="f3 fw7 mt0 lh-title">{entry.title}</h1>
       <EntryBody body={entry.body} onClickTag={onClickTag} />
     </EntryContainer>
@@ -54,9 +53,15 @@ Entry.propTypes = {
   onClickTag: t.func
 };
 
-const Loader = () => <div className="tc ma6 code gray">Loading entries…</div>;
+const Loader = () => (
+  <div className="tc ma6 code gray">
+    <p>Loading entries…</p>
+  </div>
+);
 const Empty = () => (
-  <p className="code gray">No entries to show. Try a different search.</p>
+  <div className="tc ma6 code gray">
+    <p>No entries to show. Try a different search.</p>
+  </div>
 );
 
 const SearchInput = props => (
@@ -94,10 +99,17 @@ const JRNL = ({ title, source, loaded, filter, onInputChange, onClickTag }) => {
   const parsed = source ? parse(source) : [];
   // Show entries in reverse chronological order
   let entries = parsed.reverse();
+  // Add slug field to each entry
+  entries.forEach(entry => {
+    entry.slug = makeSlug(entry);
+  });
   if (filter) {
-    entries = entries.filter(
-      entry => entry.title.includes(filter) || entry.body.includes(filter)
-    );
+    const entryFilter = entry => {
+      const entryLower = `${entry.title}\n${entry.body}`.toLowerCase();
+      const filterLower = filter.toLowerCase();
+      return entryLower.includes(filterLower);
+    };
+    entries = entries.filter(entryFilter);
   }
   return (
     <div className="mw7 center sans-serif near-black">
@@ -106,7 +118,7 @@ const JRNL = ({ title, source, loaded, filter, onInputChange, onClickTag }) => {
         {loaded ? (
           entries.length ? (
             entries.map((entry, i) => (
-              <Entry key={i} entry={entry} onClickTag={onClickTag} />
+              <Entry key={entry.slug} entry={entry} onClickTag={onClickTag} />
             ))
           ) : (
             <Empty />
