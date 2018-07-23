@@ -4,3 +4,7 @@
 .Markdown a:hover {
   color: #137752; /* dark-green */
 }
+
+.Markdown .ping-link {
+  background-color: #e8fdf5; /* washed-blue */
+}

@@ -3,7 +3,7 @@
 Just create an HTML file with a `<jrnl>` tag and include the 
 standalone `jrnl-render` script:
 
-```
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,12 +25,10 @@ That's it!
 jrnl-render is a JavaScript file that renders your jrnl files to
 a webpage.
 
-Features:
-
 * Extremely easy to set up
 * Renders GitHub-flavored Markdown
-* Syntax highlighting
 * Filtering and tag support, e.g. @javascript
+* Syntax highlighting
 
 
 2020-08-10 03:22 What is jrnl?

@@ -149,7 +149,13 @@ export default class App extends React.Component {
   componentDidMount() {
     const filter = getQueryParam("q") || "";
     this.setState({ filter, loaded: false });
-    if (this.props.src.trim().startsWith("http://")) {
+    const src = this.props.src.trim();
+    // Try to guess if a URL was passed
+    if (
+      src.startsWith("http://") ||
+      src.startsWith("/") ||
+      src.startsWith(".")
+    ) {
       fetchTxt(this.props.src).then(source => {
         this.setState({ source, loaded: true });
       });
