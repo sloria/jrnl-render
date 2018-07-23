@@ -91,6 +91,7 @@
     ]
   },
   "dependencies": {
+    "jrnl-parse": "^0.1.4",
     "rehype-highlight": "^2.1.0",
     "rehype-stringify": "^4.0.0",
     "remark": "^9.0.0",
