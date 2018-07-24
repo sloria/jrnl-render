@@ -23,6 +23,33 @@ Render a [jrnl](http://jrnl.sh) file as a webpage.
 </html>
 ```
 
+## Customization
+
+Customize title:
+
+```html
+<jrnl title="My Journal" src="..." />
+```
+
+Optional copyright in footer (supports Markdown):
+
+```html
+<jrnl copyright="Copyright 2018 by [Steven Loria](https://stevenloria.com)" src="..." />
+```
+
+## Usage as a React component
+
+```javascript
+import JRNL from "jrnl-render";
+
+// somewhere in your component
+<JRNL
+  src="..."
+  title="My Journal"
+  copyright="Copyright 2018 by Steven Loria"
+  />
+```
+
 ## Developing
 
 * `npm install`

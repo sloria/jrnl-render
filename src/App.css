@@ -1,10 +1,14 @@
-.Markdown a {
+.Footer a, .u-markdown a {
   color: #001b44; /* navy */
 }
-.Markdown a:hover {
-  color: #137752; /* dark-green */
+.Footer a:hover, .u-markdown a:hover {
+  color: #00449e; /* dark-blue */
 }
 
-.Markdown .ping-link {
+.Footer a {
+  text-decoration: none;
+}
+
+.ping-link {
   background-color: #e8fdf5; /* washed-blue */
 }

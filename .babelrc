@@ -8,6 +8,9 @@
     }],
     "react"
   ],
+  "plugins": [
+    "transform-object-rest-spread"
+  ],
   // Overrides for Jest
   // Jest runs in node, so transpile
   // imports to requires

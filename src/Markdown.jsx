@@ -6,6 +6,29 @@ import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import rehypeHighlight from "rehype-highlight";
 
+export function renderMarkdown(source, { simple = false, tagURL = null } = {}) {
+  // If simple is true, don't use remark-ping
+  const plugins = (simple
+    ? []
+    : [
+        [
+          // Use remark-ping to convert tags to links
+          remarkPing,
+          {
+            pingUsername: tag => true,
+            userURL: tagURL
+          }
+        ]
+      ]
+  ).concat([remarkRehype, rehypeStringify, rehypeHighlight]);
+  const remarkInst = remark().use(plugins);
+  return new Promise((resolve, reject) => {
+    const result = remarkInst.process(source, (err, rendered) => {
+      err ? reject(err) : resolve(rendered);
+    });
+  });
+}
+
 export default class Markdown extends React.Component {
   constructor(props) {
     super(props);
@@ -14,22 +37,20 @@ export default class Markdown extends React.Component {
     };
   }
   componentDidMount() {
-    const remarkInst = remark()
-      // Use remark-ping to transform tags (e.g. @javascript) into links
-      .use(remarkPing, {
-        pingUsername: tag => true,
-        userURL: this.props.tagURL
-      })
-      .use(remarkRehype)
-      .use(rehypeStringify)
-      .use(rehypeHighlight);
-    const result = remarkInst.process(this.props.source, (err, rendered) => {
-      if (err) throw err;
-      this.setState({ rendered });
-    });
+    renderMarkdown(this.props.source, { tagURL: this.props.tagURL }).then(
+      rendered => {
+        this.setState({ rendered });
+      }
+    );
   }
   render() {
-    return <div dangerouslySetInnerHTML={{ __html: this.state.rendered }} />;
+    const { source, tagURL, ...rest } = this.props;
+    return (
+      <div
+        dangerouslySetInnerHTML={{ __html: this.state.rendered }}
+        {...rest}
+      />
+    );
   }
 }
 Markdown.propTypes = {

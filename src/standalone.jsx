@@ -15,7 +15,8 @@ function autoInit() {
     throw new Error('"src" attribute is required on <jrnl> tag.');
   }
   const title = elem.getAttribute("title") || "";
-  ReactDOM.render(<App src={src} title={title} />, elem);
+  const copyright = elem.getAttribute("copyright") || "";
+  ReactDOM.render(<App src={src} title={title} copyright={copyright} />, elem);
 }
 
 document.addEventListener("DOMContentLoaded", autoInit);
