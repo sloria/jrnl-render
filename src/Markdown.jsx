@@ -24,7 +24,7 @@ export function renderMarkdown(source, { simple = false, tagURL = null } = {}) {
   const remarkInst = remark().use(plugins);
   return new Promise((resolve, reject) => {
     const result = remarkInst.process(source, (err, rendered) => {
-      err ? reject(err) : resolve(rendered);
+      err ? reject(err) : resolve(rendered.contents);
     });
   });
 }

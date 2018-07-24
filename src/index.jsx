@@ -152,7 +152,7 @@ Header.propTypes = {
   filter: t.string
 };
 
-const JRNL = ({
+export const JRNL = ({
   title,
   source,
   loaded,
@@ -205,8 +205,11 @@ JRNL.propTypes = {
   onClickTag: t.func,
   copyright: t.string
 };
+JRNL.defaultProps = {
+  loaded: true
+};
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -227,19 +230,14 @@ export default class App extends React.Component {
   }
   componentDidMount() {
     const filter = getQueryParam("q") || "";
-    this.setState({ filter, loaded: false });
-    const src = this.props.src.trim();
     // Try to guess if a URL was passed
-    if (
-      src.startsWith("http://") ||
-      src.startsWith("/") ||
-      src.startsWith(".")
-    ) {
-      fetchTxt(this.props.src).then(source => {
+    if (this.props.url) {
+      this.setState({ filter, loaded: false });
+      fetchTxt(this.props.url).then(source => {
         this.setState({ source, loaded: true });
       });
-    } else {
-      this.setState({ source: this.props.src });
+    } else if (this.props.source) {
+      this.setState({ source: this.props.source });
     }
   }
   render() {
@@ -256,9 +254,11 @@ export default class App extends React.Component {
     );
   }
 }
-
 App.propTypes = {
-  src: t.string.isRequired,
+  url: t.string,
+  source: t.string,
   title: t.string,
   copyright: t.string
 };
+
+export default App;

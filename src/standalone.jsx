@@ -16,7 +16,7 @@ function autoInit() {
   }
   const title = elem.getAttribute("title") || "";
   const copyright = elem.getAttribute("copyright") || "";
-  ReactDOM.render(<App src={src} title={title} copyright={copyright} />, elem);
+  ReactDOM.render(<App url={src} title={title} copyright={copyright} />, elem);
 }
 
 document.addEventListener("DOMContentLoaded", autoInit);
