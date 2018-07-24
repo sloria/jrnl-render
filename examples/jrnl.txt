@@ -1,3 +1,34 @@
+2020-05-23 02:12 Usage as a React component
+
+You can use jrnl-render as a @react component.
+
+```javascript
+import JRNL from "jrnl-render";
+
+<JRNL
+  src="..."
+  title="My Journal"
+  copyright="Copyright 2018 by Steven Loria"
+  />
+```
+
+@javascript
+
+2020-05-02 10:12 Customizing jrnl-render
+
+Customize title:
+
+```html
+<jrnl title="My Journal" src="..." />
+```
+
+Optional copyright in footer (supports Markdown):
+
+```html
+<jrnl copyright="Copyright 2018 by [Steven Loria](https://stevenloria.com)" src="..." />
+```
+
+
 2020-05-01 09:42 Setting up jrnl-render
 
 Just create an HTML file with a `<jrnl>` tag and include the 
@@ -35,4 +66,4 @@ a webpage.
 
 jrnl is a simple journal application for your command line. Journals are stored as human readable plain text files - you can put them into a Dropbox folder for instant syncing and you can be assured that your journal will still be readable in 2050, when all your fancy iPad journal applications will long be forgotten.
 
-http://jrnl.sh/
+Check out http://jrnl.sh/

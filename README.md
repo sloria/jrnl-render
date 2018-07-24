@@ -42,7 +42,6 @@ Optional copyright in footer (supports Markdown):
 ```javascript
 import JRNL from "jrnl-render";
 
-// somewhere in your component
 <JRNL
   src="..."
   title="My Journal"
