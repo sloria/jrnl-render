@@ -9,12 +9,12 @@ import Entry from "./Entry.jsx";
 import renderMarkdown from "./render-markdown";
 
 const Loader = () => (
-  <div className="Loader tc ma6 code gray">
+  <div className="Loader tc mt5 mh5 mt6-l mh6-l code gray vh-75">
     <p>Loading entries…</p>
   </div>
 );
 const Empty = () => (
-  <div className="Empty tc ma6 code gray">
+  <div className="Empty tc mt5 mh5 mt6-l mh6-l code gray vh-75">
     <p>No entries to show. Try a different search.</p>
   </div>
 );
@@ -81,7 +81,7 @@ Footer.propTypes = {
 
 const Header = ({ title, onInputChange, filter }) => (
   <header className="Header flex mt4 mb3 mw8 center">
-    <h2 className="Header-brand f4 mv0 pv2">
+    <h2 className="Header-brand f4 mv0 pv2 ph3 ph0-l">
       <a className="no-underline hover-dark-pink near-black" href="/">
         {title || "JRNL"}
       </a>
@@ -134,7 +134,7 @@ export const JRNL = ({
   return (
     <div className="App mw7 center sans-serif near-black">
       <Header title={title} onInputChange={onInputChange} filter={filter} />
-      <section>
+      <section className="min-vh-75">
         {loaded ? (
           entries.length ? (
             entries.map((entry, i) => (

@@ -25,7 +25,7 @@ const EntryContainer = ({ slug, date, children }) => (
         <div className="w-100">{children}</div>
       </div>
     </div>
-    <time className="Entry-date f7 code mb2 db">
+    <time className="Entry-date f7 code mb2 db ph3 ph0-l">
       <a className="gray dim no-underline" title={slug} href={`#${slug}`}>
         {formatDate(date)}
       </a>
@@ -40,7 +40,7 @@ EntryContainer.propTypes = {
 const Entry = ({ entry, onClickTag }) => {
   return (
     <EntryContainer slug={entry.slug} date={entry.date}>
-      <h1 className="Entry-title f3 fw7 mt0 lh-title">{entry.title}</h1>
+      <h1 className="Entry-title f4 f3-l fw7 mt0 lh-title">{entry.title}</h1>
       <EntryBody body={entry.body} onClickTag={onClickTag} />
     </EntryContainer>
   );
