@@ -6,7 +6,7 @@ import t from "prop-types";
 import getQueryParam from "./get-query-param";
 import fetchTxt from "./fetch-txt";
 import Entry from "./Entry.jsx";
-import { renderMarkdown } from "./Markdown.jsx";
+import renderMarkdown from "./render-markdown";
 
 const Loader = () => (
   <div className="Loader tc ma6 code gray">

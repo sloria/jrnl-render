@@ -1,4 +1,4 @@
-import { renderMarkdown } from "./Markdown.jsx";
+import renderMarkdown from "./render-markdown";
 
 describe("renderMarkdown", () => {
   it("renders simple markdown", async () => {
