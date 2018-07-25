@@ -34,7 +34,7 @@ if (standalone) {
         "./node_modules/preact-compat/dist/preact-compat.es.js"
       )
     }),
-    nodeResolve({ extensions: [".js", ".jsx", ".json"] }),
+    nodeResolve(),
     replace({
       "process.env.NODE_ENV": JSON.stringify(env)
     }),
