@@ -2,7 +2,7 @@ import React from "react";
 import t from "prop-types";
 
 import Markdown from "./Markdown.jsx";
-import { formatDate } from "./index.jsx";
+import { formatDate } from "./utils";
 
 const EntryBody = ({ body, onClickTag }) => (
   <div className="Entry-body f6 f5-l lh-copy">

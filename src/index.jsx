@@ -1,5 +1,4 @@
 import parse from "jrnl-parse";
-import slugify from "slugify";
 import React from "react";
 import t from "prop-types";
 
@@ -7,6 +6,7 @@ import getQueryParam from "./get-query-param";
 import fetchTxt from "./fetch-txt";
 import Entry from "./Entry.jsx";
 import renderMarkdown from "./render-markdown";
+import { slugifyEntry } from "./utils";
 
 const Loader = () => (
   <div className="Loader tc mt5 mh5 mt6-l mh6-l code gray vh-75">
@@ -103,10 +103,6 @@ Header.propTypes = {
   filter: t.string
 };
 
-export const makeSlug = entry =>
-  `${formatDate(entry.date)}-${slugify(entry.title, { lower: true })}`;
-export const formatDate = date => date.toISOString().slice(0, 10); // 2020-02-23
-
 export const JRNL = ({
   title,
   source,
@@ -121,7 +117,7 @@ export const JRNL = ({
   let entries = parsed.reverse();
   // Add slug field to each entry
   entries.forEach(entry => {
-    entry.slug = makeSlug(entry);
+    entry.slug = slugifyEntry(entry);
   });
   if (filter) {
     const entryFilter = entry => {
