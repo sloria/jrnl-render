@@ -7,6 +7,11 @@
 
 Render a [jrnl](http://jrnl.sh) file as a webpage.
 
+jrnl is a command-line journaling application that stores in
+plain text files. If you put your files on Dropbox (or any other
+hosting service), you can use jrnl-render to generate a webpage for your
+journal(s).
+
 ## Quickstart
 
 ```html
@@ -39,6 +44,10 @@ Optional copyright in footer (supports Markdown):
 ```
 
 ## Usage as a React component
+
+```
+npm i jrnl-render
+```
 
 ```javascript
 import JRNL from "jrnl-render";

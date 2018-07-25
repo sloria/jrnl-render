@@ -120,10 +120,18 @@ export const JRNL = ({
     entry.slug = slugifyEntry(entry);
   });
   if (filter) {
+    // Naive search. If all tokens are in the
+    // title+body, it's a hit
     const entryFilter = entry => {
+      const filterTokens = filter.split(/\s+/);
       const entryLower = `${entry.title}\n${entry.body}`.toLowerCase();
       const filterLower = filter.toLowerCase();
-      return entryLower.includes(filterLower);
+      for (const token of filterTokens) {
+        if (!entryLower.includes(token)) {
+          return false;
+        }
+      }
+      return true;
     };
     entries = entries.filter(entryFilter);
   }
