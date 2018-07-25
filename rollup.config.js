@@ -15,7 +15,7 @@ import postcss from "rollup-plugin-postcss";
 
 const env = process.env.NODE_ENV;
 const standalone = process.env.STANDALONE == "true";
-const umdName = "jrnl";
+const umdName = "jrnlRender";
 const config = {
   plugins: [postcss()]
 };
@@ -23,7 +23,6 @@ const config = {
 if (standalone) {
   config.input = resolve("src", "standalone.jsx");
   config.output = {
-    name: umdName,
     format: "iife"
   };
   config.plugins.push(
