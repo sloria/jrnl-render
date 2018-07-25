@@ -25,7 +25,7 @@ const EntryContainer = ({ slug, date, children }) => (
         <div className="w-100">{children}</div>
       </div>
     </div>
-    <time className="f7 code mb2 db">
+    <time className="Entry-date f7 code mb2 db">
       <a className="gray dim no-underline" title={slug} href={`#${slug}`}>
         {formatDate(date)}
       </a>

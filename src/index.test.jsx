@@ -1,6 +1,5 @@
 import fs from "fs";
 import { resolve } from "path";
-import jest from "jest";
 import ReactDOM from "react-dom";
 import React from "react";
 import { render } from "enzyme";
