@@ -1,5 +1,6 @@
 import { resolve } from "path";
 
+import alias from "rollup-plugin-alias";
 import serve from "rollup-plugin-serve";
 import json from "rollup-plugin-json";
 import nodeBuiltins from "rollup-plugin-node-builtins";
@@ -26,7 +27,14 @@ if (standalone) {
     format: "iife"
   };
   config.plugins.push(
-    nodeResolve(),
+    // transparently use preact in standalone build
+    alias({
+      react: resolve("./node_modules/preact-compat/dist/preact-compat.es.js"),
+      "react-dom": resolve(
+        "./node_modules/preact-compat/dist/preact-compat.es.js"
+      )
+    }),
+    nodeResolve({ extensions: [".js", ".jsx", ".json"] }),
     replace({
       "process.env.NODE_ENV": JSON.stringify(env)
     }),

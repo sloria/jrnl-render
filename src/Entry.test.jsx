@@ -2,7 +2,7 @@ import ReactDOM from "react-dom";
 import React from "react";
 import { render } from "enzyme";
 
-import Entry from "./Entry.jsx";
+import Entry from "./Entry";
 
 describe("Entry", () => {
   it("renders title and date", () => {
