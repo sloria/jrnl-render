@@ -1,12 +1,18 @@
-.Footer a, .u-markdown a {
+.Footer a,
+.u-markdown a {
   color: #001b44; /* navy */
 }
-.Footer a:hover, .u-markdown a:hover {
+.Footer a:hover,
+.u-markdown a:hover {
   color: #00449e; /* dark-blue */
 }
 
 .Footer a {
   text-decoration: none;
+}
+
+.u-markdown blockquote {
+  color: #777; /* gray */
 }
 
 .min-vh-75 {
