@@ -5,57 +5,8 @@ import t from "prop-types";
 
 import getQueryParam from "./get-query-param";
 import fetchTxt from "./fetch-txt";
-import Markdown, { renderMarkdown } from "./Markdown.jsx";
-
-const EntryBody = ({ body, onClickTag }) => (
-  <div className="Entry-body f6 f5-l lh-copy">
-    <Markdown
-      className="u-markdown"
-      source={body}
-      tagURL={tag => `?q=@${tag}`}
-    />
-  </div>
-);
-EntryBody.propTypes = {
-  body: t.string,
-  onClickTag: t.func
-};
-
-const formatDate = date => date.toISOString().slice(0, 10); // 2020-02-23
-const makeSlug = entry =>
-  `${formatDate(entry.date)}-${slugify(entry.title, { lower: true })}`;
-
-const EntryContainer = ({ slug, date, children }) => (
-  <article id={slug} className="Entry bb b--black-10">
-    <div className="db pv5 ph3 ph0-l">
-      <div className="flex flex-column flex-row-ns">
-        <div className="w-100">{children}</div>
-      </div>
-    </div>
-    <time className="f7 code mb2 db">
-      <a className="gray dim no-underline" title={slug} href={`#${slug}`}>
-        {formatDate(date)}
-      </a>
-    </time>
-  </article>
-);
-EntryContainer.propTypes = {
-  children: t.array,
-  date: t.instanceOf(Date).isRequired,
-  slug: t.string.isRequired
-};
-const Entry = ({ entry, onClickTag }) => {
-  return (
-    <EntryContainer slug={entry.slug} date={entry.date}>
-      <h1 className="Entry-title f3 fw7 mt0 lh-title">{entry.title}</h1>
-      <EntryBody body={entry.body} onClickTag={onClickTag} />
-    </EntryContainer>
-  );
-};
-Entry.propTypes = {
-  entry: t.object,
-  onClickTag: t.func
-};
+import Entry from "./Entry.jsx";
+import { renderMarkdown } from "./Markdown.jsx";
 
 const Loader = () => (
   <div className="Loader tc ma6 code gray">
@@ -151,6 +102,10 @@ Header.propTypes = {
   onInputChange: t.func,
   filter: t.string
 };
+
+export const makeSlug = entry =>
+  `${formatDate(entry.date)}-${slugify(entry.title, { lower: true })}`;
+export const formatDate = date => date.toISOString().slice(0, 10); // 2020-02-23
 
 export const JRNL = ({
   title,
