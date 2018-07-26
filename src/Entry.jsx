@@ -2,6 +2,7 @@ import React from "react";
 import t from "prop-types";
 
 import Markdown from "./Markdown.jsx";
+import LinkIcon from "react-icons/lib/io/link";
 import { formatDate } from "./utils";
 
 const EntryBody = ({ body, onClickTag }) => (
@@ -26,7 +27,7 @@ const EntryContainer = ({ slug, date, children }) => (
       </div>
     </div>
     <time className="Entry-date f7 code mb2 db ph3 ph0-l">
-      <a className="gray dim no-underline" title={slug} href={`#${slug}`}>
+      <a className="gray no-underline" title={slug} href={`#${slug}`}>
         {formatDate(date)}
       </a>
     </time>
@@ -40,7 +41,18 @@ EntryContainer.propTypes = {
 const Entry = ({ entry, onClickTag }) => {
   return (
     <EntryContainer slug={entry.slug} date={entry.date}>
-      <h1 className="Entry-title f4 f3-l fw7 mt0 lh-title">{entry.title}</h1>
+      <h1 className="Entry-title f4 f3-l fw7 mt0 lh-title">
+        <a
+          className="near-black no-underline"
+          title={entry.title}
+          href={`#${entry.slug}`}
+        >
+          {entry.title}
+        </a>
+        <span className="Permalink silver">
+          <LinkIcon />
+        </span>
+      </h1>
       <EntryBody body={entry.body} onClickTag={onClickTag} />
     </EntryContainer>
   );

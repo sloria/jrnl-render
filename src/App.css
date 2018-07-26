@@ -18,3 +18,11 @@
 .min-vh-75 {
   min-height: 75vh;
 }
+
+.Permalink {
+  visibility: hidden;
+}
+
+.Entry-title a:hover ~ .Permalink {
+  visibility: visible;
+}

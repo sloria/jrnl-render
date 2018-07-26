@@ -59,6 +59,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-icons": "^2.2.7",
     "rimraf": "^2.6.1",
     "rollup": "^0.63.3",
     "rollup-plugin-alias": "^1.4.0",
