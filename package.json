@@ -10,7 +10,7 @@
     "build:standalone:min": "NODE_ENV=production STANDALONE=true rollup -c -o dist/jrnl-render.standalone.min.js",
     "build:umd": "NODE_ENV=development rollup -c -o dist/jrnl-render.js",
     "build:umd:min": "NODE_ENV=production rollup -c -o dist/jrnl-render.min.js",
-    "build:demo": "rimraf examples/jrnl-render/jrnl-render.standalone.js && npm run build:standalone:min && cp dist/jrnl-render.standalone.min.js example/jrnl-render.standalone.js",
+    "build:demo": "cp dist/jrnl-render.standalone.min.js example/jrnl-render.standalone.js",
     "build": "npm-run-all --parallel build:umd build:umd:min build:standalone build:standalone:min",
     "clean": "rimraf dist examples/jrnl-render.standalone.js",
     "prebuild": "npm run clean",
