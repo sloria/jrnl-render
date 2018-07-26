@@ -10,7 +10,7 @@ describe("App", () => {
   let src;
   beforeAll(() => {
     src = fs.readFileSync(
-      resolve(__dirname, "..", "examples", "jrnl.txt"),
+      resolve(__dirname, "..", "example", "jrnl.txt"),
       "utf8"
     );
   });
@@ -23,5 +23,10 @@ describe("App", () => {
   it("renders entries", () => {
     const c = render(<JRNL source={src} />);
     expect(c.text()).toMatch("Setting up jrnl-render");
+  });
+
+  it("renders empty state", () => {
+    const c = render(<JRNL source="" />);
+    expect(c.text()).toMatch("No entries to show.");
   });
 });
