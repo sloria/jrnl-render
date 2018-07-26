@@ -77,7 +77,7 @@ if (env === "production") {
 }
 
 if (process.env.SERVE === "true") {
-  config.plugins.push(serve({ contentBase: ["dist", "examples"], open: true }));
+  config.plugins.push(serve({ contentBase: ["dist", "example"], open: true }));
 }
 
 config.plugins.push(filesize());

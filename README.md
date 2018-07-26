@@ -12,6 +12,10 @@ plain text files. If you put your files on Dropbox (or any other
 hosting service), you can use jrnl-render to generate a webpage for your
 journal(s).
 
+## Demo
+
+https://jrnl-render-demo.netlify.com/
+
 ## Quickstart
 
 ```html
