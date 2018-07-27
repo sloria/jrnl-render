@@ -98,7 +98,8 @@
     ]
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "./src/setupTests.js"
+    "setupTestFrameworkScriptFile": "./src/setupTests.js",
+    "testURL": "http://localhost/"
   },
   "dependencies": {
     "jrnl-parse": "^0.1.4",
