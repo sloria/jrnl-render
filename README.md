@@ -38,7 +38,7 @@ https://jrnl-render-demo.netlify.com/
 Customize title:
 
 ```html
-<jrnl title="My Journal" src="..." />
+<jrnl jrnl-title="My Journal" src="..." />
 ```
 
 Optional copyright in footer (supports Markdown):

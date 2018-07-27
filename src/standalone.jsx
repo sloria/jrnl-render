@@ -14,7 +14,7 @@ function autoInit() {
   if (!src) {
     throw new Error('"src" attribute is required on <jrnl> tag.');
   }
-  const title = elem.getAttribute("title") || null;
+  const title = elem.getAttribute("jrnl-title") || null;
   const copyright = elem.getAttribute("copyright") || "";
   const loadingMessage = elem.getAttribute("loading") || null;
   ReactDOM.render(
