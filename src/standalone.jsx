@@ -14,9 +14,18 @@ function autoInit() {
   if (!src) {
     throw new Error('"src" attribute is required on <jrnl> tag.');
   }
-  const title = elem.getAttribute("title") || "";
+  const title = elem.getAttribute("title") || null;
   const copyright = elem.getAttribute("copyright") || "";
-  ReactDOM.render(<App url={src} title={title} copyright={copyright} />, elem);
+  const loadingMessage = elem.getAttribute("loading") || null;
+  ReactDOM.render(
+    <App
+      url={src}
+      title={title}
+      copyright={copyright}
+      loadingMessage={loadingMessage}
+    />,
+    elem
+  );
 }
 
 document.addEventListener("DOMContentLoaded", autoInit);

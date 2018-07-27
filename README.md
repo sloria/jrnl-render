@@ -47,6 +47,12 @@ Optional copyright in footer (supports Markdown):
 <jrnl copyright="Copyright 2018 by [Steven Loria](https://stevenloria.com)" src="..." />
 ```
 
+Custom loading message:
+
+```html
+<jrnl loading="⌛️ Loading..." src="..." />
+```
+
 ## Usage as a React component
 
 ```

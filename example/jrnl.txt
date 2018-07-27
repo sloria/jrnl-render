@@ -28,6 +28,14 @@ Optional copyright in footer (supports Markdown):
 <jrnl copyright="Copyright 2018 by [Steven Loria](https://stevenloria.com)" src="..." />
 ```
 
+Custom loading message:
+
+```html
+<jrnl loading="⌛️ Loading..." src="..." />
+```
+
+For more docs, see the [README](https://github.com/sloria/jrnl-render#jrnl-render).
+
 
 2020-05-01 09:42 Setting up jrnl-render
 

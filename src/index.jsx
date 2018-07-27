@@ -8,11 +8,14 @@ import Entry from "./Entry.jsx";
 import renderMarkdown from "./render-markdown";
 import { slugifyEntry } from "./utils";
 
-const Loader = () => (
+const Loader = ({ message }) => (
   <div className="Loader tc mt5 mh5 mt6-l mh6-l code gray vh-75">
-    <p>Loading entries…</p>
+    <p>{message || "Loading entries…"}</p>
   </div>
 );
+Loader.propTypes = {
+  message: t.string
+};
 const Empty = () => (
   <div className="Empty tc mt5 mh5 mt6-l mh6-l code gray vh-75">
     <p>No entries to show. Try a different search.</p>
@@ -107,6 +110,7 @@ export const JRNL = ({
   title,
   source,
   loaded,
+  loadingMessage,
   copyright,
   filter,
   onInputChange,
@@ -148,7 +152,7 @@ export const JRNL = ({
             <Empty />
           )
         ) : (
-          <Loader />
+          <Loader message={loadingMessage} />
         )}
       </section>
       <Footer copyright={copyright} />
@@ -162,7 +166,8 @@ JRNL.propTypes = {
   filter: t.string,
   onInputChange: t.func,
   onClickTag: t.func,
-  copyright: t.string
+  copyright: t.string,
+  loadingMessage: t.string
 };
 JRNL.defaultProps = {
   loaded: true
@@ -203,6 +208,7 @@ class App extends React.Component {
     return (
       <JRNL
         loaded={this.state.loaded}
+        loadingMessage={this.props.loadingMessage}
         title={this.props.title}
         copyright={this.props.copyright}
         source={this.state.source}
@@ -217,7 +223,8 @@ App.propTypes = {
   url: t.string,
   source: t.string,
   title: t.string,
-  copyright: t.string
+  copyright: t.string,
+  loadingMessage: t.string
 };
 
 export default App;
