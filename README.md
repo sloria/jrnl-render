@@ -47,7 +47,7 @@ Optional copyright in footer (supports Markdown):
 <jrnl copyright="Copyright 2018 by [Steven Loria](https://stevenloria.com)" src="..." />
 ```
 
-Custom loading message:
+Custom loading message (supports Markdown):
 
 ```html
 <jrnl loading="⌛️ Loading..." src="..." />
