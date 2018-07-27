@@ -56,7 +56,8 @@ if (standalone) {
     "remark-ping",
     "remark-rehype",
     "rehype-stringify",
-    "rehype-highlight"
+    "rehype-highlight",
+    "react-icons/lib/io/link"
   ];
 }
 
