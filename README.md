@@ -27,7 +27,7 @@ https://jrnl-render-demo.netlify.com/
   </head>
   <body>
     <!-- CHANGEME: Use your own URL here -->
-    <jrnl src="https://dl.dropboxusercontent.com/s/abcdef1234/jrnl.txt?dl=0" />
+    <jrnl src="https://dl.dropboxusercontent.com/s/abcdef1234/jrnl.txt" />
     <script src="https://unpkg.com/jrnl-render/dist/jrnl-render.standalone.min.js"></script>
   </body>
 </html>
