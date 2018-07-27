@@ -48,7 +48,7 @@ const Entry = ({ entry, onClickTag }) => {
           href={`#${entry.slug}`}
         >
           {entry.title}
-        </a>
+        </a>{" "}
         <span className="Permalink silver">
           <LinkIcon />
         </span>
