@@ -75,6 +75,11 @@ import JRNL from "jrnl-render";
 * To run tests: `npm test`
 * To run tests in watch mode: `npm test -- --watch`
 
+## Related
+
+* [jrnl-parse](https://github.com/sloria/jrnl-parse) - Parse a jrnl file
+    in Node.js or the browser.
+
 ## License
 
 MIT Licensed.
