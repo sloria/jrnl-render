@@ -85,7 +85,8 @@ class Footer extends React.Component {
               rel="noopener noreferrer"
             >
               jrnl
-            </a>. Rendered with{" "}
+            </a>
+            . Rendered with{" "}
             <a
               className="link"
               href="https://github.com/sloria/jrnl-render"
@@ -93,7 +94,8 @@ class Footer extends React.Component {
               rel="noopener noreferrer"
             >
               jrnl-render
-            </a>.
+            </a>
+            .
           </small>
         </div>
       </footer>
