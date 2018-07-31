@@ -33,7 +33,7 @@ if (standalone) {
         "./node_modules/preact-compat/dist/preact-compat.es.js"
       )
     }),
-    nodeResolve(),
+    nodeResolve({ preferBuiltins: false }),
     replace({
       "process.env.NODE_ENV": JSON.stringify(env)
     }),
@@ -57,7 +57,7 @@ if (standalone) {
     "remark-rehype",
     "rehype-stringify",
     "rehype-highlight",
-    "react-icons/lib/io/link"
+    "react-icons/io"
   ];
 }
 
@@ -66,7 +66,7 @@ config.plugins.push(
     // Needed for rollup: https://rollupjs.org/guide/en#babel
     // NOTE: this gets merged with .babelrc
     plugins: ["external-helpers"],
-    exclude: ["**/*.json", "node_modules/**"]
+    exclude: ["**/*.json"]
   }),
   nodeBuiltins(),
   nodeGlobals(),

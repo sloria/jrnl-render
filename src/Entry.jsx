@@ -2,7 +2,7 @@ import React from "react";
 import t from "prop-types";
 
 import Markdown from "./Markdown.jsx";
-import LinkIcon from "react-icons/lib/io/link";
+import { IoMdLink as LinkIcon } from "react-icons/io";
 import { formatDate } from "./utils";
 
 const EntryBody = ({ body, onClickTag }) => (
@@ -46,7 +46,7 @@ const Entry = ({ entry, onClickTag }) => {
           {entry.title}
         </a>{" "}
         <span className="Permalink silver">
-          <LinkIcon />
+          <LinkIcon style={{ verticalAlign: "middle" }} />
         </span>
       </h1>
       <EntryBody body={entry.body} onClickTag={onClickTag} />
