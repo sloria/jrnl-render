@@ -17,7 +17,10 @@ const env = process.env.NODE_ENV;
 const standalone = process.env.STANDALONE == "true";
 const umdName = "jrnlRender";
 const config = {
-  plugins: [postcss()]
+  plugins: [postcss()],
+  watch: {
+    chokidar: true
+  }
 };
 
 if (standalone) {
