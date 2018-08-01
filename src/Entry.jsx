@@ -34,7 +34,7 @@ const EntryContainer = ({ slug, date, children }) => (
   </article>
 );
 EntryContainer.propTypes = {
-  children: t.array,
+  children: t.node,
   date: t.instanceOf(Date).isRequired,
   slug: t.string.isRequired
 };

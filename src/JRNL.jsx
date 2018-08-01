@@ -6,11 +6,12 @@ import { slugifyEntry } from "./utils";
 import parse from "jrnl-parse";
 import Markdown from "./Markdown.jsx";
 
-const Empty = () => (
-  <div className="Empty tc mt5 mh5 mt6-l mh6-l code gray vh-75">
-    <p>No entries to show. Try a different search.</p>
-  </div>
+const Empty = ({ children }) => (
+  <div className="Empty tc mt5 mh5 mt6-l mh6-l code gray vh-75">{children}</div>
 );
+Empty.propTypes = {
+  children: t.node
+};
 
 const Loader = ({ message }) => (
   <div className="Loader tc mt5 mh5 mt6-l mh6-l code gray vh-75">
@@ -125,16 +126,18 @@ const JRNL = ({
     <div className="App mw7 center sans-serif near-black">
       <Header title={title} onInputChange={onInputChange} filter={filter} />
       <section className="min-vh-75">
-        {loaded ? (
-          entries.length ? (
-            entries.map((entry, i) => (
-              <Entry key={entry.slug} entry={entry} onClickTag={onClickTag} />
-            ))
-          ) : (
-            <Empty />
-          )
-        ) : (
+        {loaded === false ? (
           <Loader message={loadingMessage} />
+        ) : loaded === null ? (
+          <Empty />
+        ) : entries.length ? (
+          entries.map((entry, i) => (
+            <Entry key={entry.slug} entry={entry} onClickTag={onClickTag} />
+          ))
+        ) : (
+          <Empty>
+            <p>No entries to show. Try a different search.</p>
+          </Empty>
         )}
       </section>
       <Footer copyright={copyright} />

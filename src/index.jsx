@@ -5,13 +5,17 @@ import getQueryParam from "./get-query-param";
 import fetchTxt from "./fetch-txt";
 import JRNL from "./JRNL.jsx";
 
+const timeout = ms =>
+  new Promise((resolve, reject) => {
+    window.setTimeout(reject, ms);
+  });
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // TODO: loading indicator
       // TODO: Error state
-      loaded: true,
+      loaded: null,
       source: null,
       filter: ""
     };
@@ -28,10 +32,15 @@ class App extends React.Component {
     const filter = getQueryParam("q") || "";
     // Try to guess if a URL was passed
     if (this.props.url) {
-      this.setState({ filter, loaded: false });
-      fetchTxt(this.props.url).then(source => {
+      this.setState({ filter });
+      const fetchPromise = fetchTxt(this.props.url).then(source => {
         this.setState({ source, loaded: true });
       });
+      // Don't show loading indicator if the request finishes
+      // in < 300ms
+      Promise.race([fetchPromise, timeout(300)]).catch(() =>
+        this.setState({ loaded: false })
+      );
     } else if (this.props.source) {
       this.setState({ source: this.props.source });
     }

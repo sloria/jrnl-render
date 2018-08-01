@@ -19,6 +19,7 @@ const umdName = "jrnlRender";
 const config = {
   plugins: [postcss()],
   watch: {
+    include: "src/**",
     chokidar: true
   }
 };
