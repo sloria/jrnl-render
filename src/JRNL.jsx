@@ -2,16 +2,24 @@ import React from "react";
 import t from "prop-types";
 
 import Entry from "./Entry.jsx";
-import MarkdownLoader from "./MarkdownLoader.jsx";
 import { slugifyEntry } from "./utils";
 import parse from "jrnl-parse";
-import renderMarkdown from "./render-markdown";
+import Markdown from "./Markdown.jsx";
 
 const Empty = () => (
   <div className="Empty tc mt5 mh5 mt6-l mh6-l code gray vh-75">
     <p>No entries to show. Try a different search.</p>
   </div>
 );
+
+const Loader = ({ message }) => (
+  <div className="Loader tc mt5 mh5 mt6-l mh6-l code gray vh-75">
+    <Markdown source={message || "Loading entries…"} simple={true} />
+  </div>
+);
+Loader.propTypes = {
+  message: t.string
+};
 
 const SearchInput = props => (
   <input
@@ -20,57 +28,38 @@ const SearchInput = props => (
   />
 );
 
-class Footer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rendered: ""
-    };
-  }
-  componentDidMount() {
-    const { copyright } = this.props;
-    if (copyright) {
-      renderMarkdown(copyright, { simple: true }).then(rendered => {
-        this.setState({ rendered });
-      });
-    }
-  }
-  render() {
-    return (
-      <footer className="Footer pv4 ph3 ph5-m ph6-l mid-gray">
-        {this.state.rendered && (
-          <small
-            dangerouslySetInnerHTML={{ __html: this.state.rendered }}
-            className="Footer-copyright u-markdown f6 db tc"
-          />
-        )}
-        <div className="tc mt3">
-          <small className="Footer-postscript f6">
-            Written with{" "}
-            <a
-              className="link"
-              href="http://jrnl.sh"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              jrnl
-            </a>
-            . Rendered with{" "}
-            <a
-              className="link"
-              href="https://github.com/sloria/jrnl-render"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              jrnl-render
-            </a>
-            .
-          </small>
-        </div>
-      </footer>
-    );
-  }
-}
+const Footer = ({ copyright }) => (
+  <footer className="Footer pv4 ph3 ph5-m ph6-l mid-gray">
+    {copyright && (
+      <small className="Footer-copyright u-markdown f6 db tc">
+        <Markdown source={copyright} simple={true} />
+      </small>
+    )}
+    <div className="tc mt3">
+      <small className="Footer-postscript f6">
+        Written with{" "}
+        <a
+          className="link"
+          href="http://jrnl.sh"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          jrnl
+        </a>
+        . Rendered with{" "}
+        <a
+          className="link"
+          href="https://github.com/sloria/jrnl-render"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          jrnl-render
+        </a>
+        .
+      </small>
+    </div>
+  </footer>
+);
 Footer.propTypes = {
   copyright: t.string
 };
@@ -145,7 +134,7 @@ const JRNL = ({
             <Empty />
           )
         ) : (
-          <MarkdownLoader message={loadingMessage} />
+          <Loader message={loadingMessage} />
         )}
       </section>
       <Footer copyright={copyright} />

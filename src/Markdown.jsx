@@ -10,11 +10,10 @@ export default class Markdown extends React.Component {
     };
   }
   componentDidMount() {
-    renderMarkdown(this.props.source, { tagURL: this.props.tagURL }).then(
-      rendered => {
-        this.setState({ rendered });
-      }
-    );
+    const { source, tagURL, simple } = this.props;
+    renderMarkdown(source, { simple, tagURL }).then(rendered => {
+      this.setState({ rendered });
+    });
   }
   render() {
     const { source, tagURL, ...rest } = this.props;
@@ -28,5 +27,6 @@ export default class Markdown extends React.Component {
 }
 Markdown.propTypes = {
   source: t.string.isRequired,
+  simple: t.bool,
   tagURL: t.func
 };
