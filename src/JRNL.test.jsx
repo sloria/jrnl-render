@@ -4,9 +4,9 @@ import ReactDOM from "react-dom";
 import React from "react";
 import { render } from "enzyme";
 
-import { JRNL } from ".";
+import JRNL from "./JRNL.jsx";
 
-describe("App", () => {
+describe("JRNL", () => {
   let src;
   beforeAll(() => {
     src = fs.readFileSync(
