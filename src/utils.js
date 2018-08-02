@@ -20,7 +20,7 @@ const timeout = ms =>
  * This is useful for showing a loading indicator only for slow HTTP
  * responses (to prevent flashing content).
  */
-export const delayedLoader = (promise, showLoaderFn, delay = 300) =>
+export const delayedLoader = (promise, showLoaderFn, delay) =>
   Promise.race([promise, timeout(delay)]).catch(err => {
     if (err instanceof TimeoutError) {
       return showLoaderFn();

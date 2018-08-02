@@ -30,11 +30,11 @@ describe("delayedLoader", () => {
   });
 
   it("should call showLoaderFn if load fn is slower than delay", async () => {
-    const promise = new Promise((resolve, reject) => {
+    const promise = new Promise(resolve => {
       setTimeout(resolve, 20, "data!");
     });
     const showLoaderFn = jest.fn();
-    const result = await delayedLoader(promise, showLoaderFn, 10);
+    await delayedLoader(promise, showLoaderFn, 10);
     expect(showLoaderFn).toHaveBeenCalledTimes(1);
   });
 

@@ -6,11 +6,6 @@ import { delayedLoader } from "./utils";
 import fetchTxt from "./fetch-txt";
 import JRNL from "./JRNL.jsx";
 
-const timeout = ms =>
-  new Promise((resolve, reject) => {
-    window.setTimeout(reject, ms);
-  });
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -39,7 +34,7 @@ class App extends React.Component {
       });
       // Don't show loading indicator if the request finishes
       // in < 300ms
-      delayedLoader(fetchPromise, () => setState({ loaded: false }), 300);
+      delayedLoader(fetchPromise, () => this.setState({ loaded: false }), 300);
     } else if (this.props.source) {
       this.setState({ source: this.props.source });
     }

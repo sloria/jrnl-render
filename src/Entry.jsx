@@ -5,7 +5,7 @@ import Markdown from "./Markdown.jsx";
 import { IoMdLink as LinkIcon } from "react-icons/io";
 import { formatDate } from "./utils";
 
-const EntryBody = ({ body, onClickTag }) => (
+const EntryBody = ({ body }) => (
   <div className="Entry-body f6 f5-l lh-copy">
     <Markdown
       className="u-markdown"
@@ -15,8 +15,7 @@ const EntryBody = ({ body, onClickTag }) => (
   </div>
 );
 EntryBody.propTypes = {
-  body: t.string,
-  onClickTag: t.func
+  body: t.string
 };
 
 const EntryContainer = ({ slug, date, children }) => (
@@ -38,7 +37,7 @@ EntryContainer.propTypes = {
   date: t.instanceOf(Date).isRequired,
   slug: t.string.isRequired
 };
-const Entry = ({ entry, onClickTag }) => {
+const Entry = ({ entry }) => {
   return (
     <EntryContainer slug={entry.slug} date={entry.date}>
       <h1 className="Entry-title f4 f3-l fw7 mt0 lh-title">
@@ -49,13 +48,12 @@ const Entry = ({ entry, onClickTag }) => {
           <LinkIcon style={{ verticalAlign: "middle" }} />
         </span>
       </h1>
-      <EntryBody body={entry.body} onClickTag={onClickTag} />
+      <EntryBody body={entry.body} />
     </EntryContainer>
   );
 };
 Entry.propTypes = {
-  entry: t.object,
-  onClickTag: t.func
+  entry: t.object
 };
 
 export default Entry;

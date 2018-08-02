@@ -112,7 +112,6 @@ const JRNL = ({
     const entryFilter = entry => {
       const filterTokens = filter.split(/\s+/);
       const entryLower = `${entry.title}\n${entry.body}`.toLowerCase();
-      const filterLower = filter.toLowerCase();
       for (const token of filterTokens) {
         if (!entryLower.includes(token)) {
           return false;
@@ -131,7 +130,7 @@ const JRNL = ({
         ) : loaded === null ? (
           <Empty />
         ) : entries.length ? (
-          entries.map((entry, i) => (
+          entries.map(entry => (
             <Entry key={entry.slug} entry={entry} onClickTag={onClickTag} />
           ))
         ) : (

@@ -16,7 +16,7 @@ export default function renderMarkdown(
           // Use remark-ping to convert tags to links
           remarkPing,
           {
-            pingUsername: tag => true,
+            pingUsername: () => true,
             userURL: tagURL
           }
         ]
@@ -24,7 +24,7 @@ export default function renderMarkdown(
   ).concat([remarkRehype, rehypeStringify, rehypeHighlight]);
   const remarkInst = remark().use(plugins);
   return new Promise((resolve, reject) => {
-    const result = remarkInst.process(source, (err, rendered) => {
+    remarkInst.process(source, (err, rendered) => {
       err ? reject(err) : resolve(rendered.contents);
     });
   });
