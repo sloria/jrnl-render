@@ -2,6 +2,7 @@ import React from "react";
 import t from "prop-types";
 
 import getQueryParam from "./get-query-param";
+import { delayedLoader } from "./utils";
 import fetchTxt from "./fetch-txt";
 import JRNL from "./JRNL.jsx";
 
@@ -38,9 +39,7 @@ class App extends React.Component {
       });
       // Don't show loading indicator if the request finishes
       // in < 300ms
-      Promise.race([fetchPromise, timeout(300)]).catch(() =>
-        this.setState({ loaded: false })
-      );
+      delayedLoader(fetchPromise, () => setState({ loaded: false }), 300);
     } else if (this.props.source) {
       this.setState({ source: this.props.source });
     }
