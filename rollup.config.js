@@ -15,7 +15,6 @@ import postcss from "rollup-plugin-postcss";
 
 const env = process.env.NODE_ENV;
 const standalone = process.env.STANDALONE == "true";
-const umdName = "jrnlRender";
 const config = {
   plugins: [postcss()],
   watch: {
@@ -43,12 +42,13 @@ if (standalone) {
     }),
     commonjs()
   );
+  if (env === "production") {
+    config.plugins.push(uglify());
+  }
 } else {
   config.input = resolve("src", "index.jsx");
   config.output = {
-    name: umdName,
-    format: "umd",
-    globals: { react: "React", "react-dom": "ReactDOM" }
+    format: "cjs"
   };
   config.external = [
     "react",
@@ -76,10 +76,6 @@ config.plugins.push(
   nodeGlobals(),
   json()
 );
-
-if (env === "production") {
-  config.plugins.push(uglify());
-}
 
 if (process.env.SERVE === "true") {
   config.plugins.push(serve({ contentBase: ["dist", "example"], open: true }));
