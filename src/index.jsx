@@ -30,7 +30,19 @@ class App extends React.Component {
     if (this.props.url) {
       this.setState({ filter });
       const fetchPromise = fetchTxt(this.props.url).then(source => {
-        this.setState({ source, loaded: true });
+        this.setState({ source, loaded: true }, () => {
+          if (window.location.hash) {
+            // setTimeout ensures that entries are fully
+            // rendered before scrolling to the entry
+            window.setTimeout(() => {
+              const id = window.location.hash.slice(1);
+              const elem = document.getElementById(id);
+              if (elem) {
+                elem.scrollIntoView(true);
+              }
+            }, 100);
+          }
+        });
       });
       // Don't show loading indicator if the request finishes
       // in < 300ms

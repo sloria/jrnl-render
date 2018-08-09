@@ -2,31 +2,14 @@ import React from "react";
 import t from "prop-types";
 import renderMarkdown from "./render-markdown";
 
-export default class Markdown extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rendered: ""
-    };
-  }
-  componentDidMount() {
-    const { source, tagURL, simple } = this.props;
-    renderMarkdown(source, { simple, tagURL }).then(rendered => {
-      this.setState({ rendered });
-    });
-  }
-  render() {
-    const { source, tagURL, ...rest } = this.props;
-    return (
-      <div
-        dangerouslySetInnerHTML={{ __html: this.state.rendered }}
-        {...rest}
-      />
-    );
-  }
-}
+const Markdown = ({ source, simple, tagURL, ...rest }) => {
+  const rendered = renderMarkdown(source, { simple, tagURL });
+  return <div dangerouslySetInnerHTML={{ __html: rendered }} {...rest} />;
+};
 Markdown.propTypes = {
   source: t.string.isRequired,
   simple: t.bool,
   tagURL: t.func
 };
+
+export default Markdown;

@@ -23,9 +23,5 @@ export default function renderMarkdown(
       ]
   ).concat([remarkRehype, rehypeStringify, rehypeHighlight]);
   const remarkInst = remark().use(plugins);
-  return new Promise((resolve, reject) => {
-    remarkInst.process(source, (err, rendered) => {
-      err ? reject(err) : resolve(rendered.contents);
-    });
-  });
+  return remarkInst.processSync(source).contents;
 }
