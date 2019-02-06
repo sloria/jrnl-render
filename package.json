@@ -103,17 +103,7 @@
     ]
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      ".(ts|tsx)": "ts-jest"
-    },
-    "testMatch": [
-      "**/?(*.)+(spec|test).(j|t)s?(x)"
-    ],
+    "preset": "ts-jest",
     "setupTestFrameworkScriptFile": "<rootDir>src/setupTests.ts",
     "testURL": "http://localhost/"
   },
