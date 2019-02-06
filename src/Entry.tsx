@@ -1,24 +1,25 @@
-import React from "react";
-import t from "prop-types";
+import * as React from "react";
 
-import Markdown from "./Markdown.jsx";
 import { IoMdLink as LinkIcon } from "react-icons/io";
+import { IEntry } from "./constants";
+import Markdown from "./Markdown";
 import { formatDate } from "./utils";
 
-const EntryBody = ({ body }) => (
-  <div className="Entry-body f6 f5-l lh-copy">
-    <Markdown
-      className="u-markdown"
-      source={body}
-      tagURL={tag => `?q=@${tag}`}
-    />
-  </div>
-);
-EntryBody.propTypes = {
-  body: t.string
+const EntryBody = (props: { body: string }) => {
+  const renderTag = (tag: string): string => `?q=@${tag}`;
+  return (
+    <div className="Entry-body f6 f5-l lh-copy">
+      <Markdown className="u-markdown" source={props.body} tagURL={renderTag} />
+    </div>
+  );
 };
 
-const EntryContainer = ({ slug, date, children }) => (
+interface IEntryContainerProps {
+  children: React.ReactNode;
+  date: Date;
+  slug: string;
+}
+const EntryContainer = ({ slug, date, children }: IEntryContainerProps) => (
   <article id={slug} className="Entry bb b--black-10">
     <div className="db pb6 pt5 ph3 ph0-l">
       <div className="flex flex-column flex-row-ns">
@@ -32,12 +33,12 @@ const EntryContainer = ({ slug, date, children }) => (
     </time>
   </article>
 );
-EntryContainer.propTypes = {
-  children: t.node,
-  date: t.instanceOf(Date).isRequired,
-  slug: t.string.isRequired
-};
-const Entry = ({ entry }) => {
+
+interface IEntryProps {
+  entry: IEntry;
+  onClickTag: (e: Event) => void;
+}
+const Entry = ({ entry }: IEntryProps) => {
   return (
     <EntryContainer slug={entry.slug} date={entry.date}>
       <h1 className="Entry-title f4 f3-l fw7 mt0 lh-title">
@@ -52,8 +53,4 @@ const Entry = ({ entry }) => {
     </EntryContainer>
   );
 };
-Entry.propTypes = {
-  entry: t.object
-};
-
 export default Entry;

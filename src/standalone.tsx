@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./index.jsx";
-import "tachyons";
 import "highlight.js/styles/github.css";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import "tachyons";
 import "./App.css";
+import App from "./index";
 
-function autoInit() {
+function autoInit(): void {
   const elem = document.querySelector("jrnl");
   if (!elem) {
     throw new Error('<jrnl src="..." /> tag not found on the page.');
@@ -20,6 +20,7 @@ function autoInit() {
   ReactDOM.render(
     <App
       url={src}
+      source={null}
       title={title}
       copyright={copyright}
       loadingMessage={loadingMessage}

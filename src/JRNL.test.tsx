@@ -1,32 +1,44 @@
-import fs from "fs";
-import { resolve } from "path";
-import ReactDOM from "react-dom";
-import React from "react";
 import { render } from "enzyme";
+import * as fs from "fs";
+import { resolve } from "path";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
-import JRNL from "./JRNL.jsx";
+import JRNL from "./JRNL";
 
 describe("JRNL", () => {
   let src;
+  let props;
   beforeAll(() => {
     src = fs.readFileSync(
       resolve(__dirname, "..", "example", "jrnl.txt"),
       "utf8"
     );
+    props = {
+      copyright: null,
+      filter: "",
+      loaded: true,
+      loadingMessage: null,
+      onClickTag: e => null,
+      onInputChange: e => null,
+      source: src,
+      title: ""
+    };
   });
 
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<JRNL source={src} />, div);
+    ReactDOM.render(<JRNL {...props} />, div);
   });
 
   it("renders entries", () => {
-    const c = render(<JRNL source={src} />);
+    const c = render(<JRNL {...props} />);
     expect(c.text()).toMatch("Setting up jrnl-render");
   });
 
   it("renders empty state", () => {
-    const c = render(<JRNL source="" />);
+    const noSourceProps = { ...props, source: "" };
+    const c = render(<JRNL {...noSourceProps} />);
     expect(c.text()).toMatch("No entries to show.");
   });
 

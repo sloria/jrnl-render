@@ -1,30 +1,31 @@
 import { resolve } from "path";
 
 import alias from "rollup-plugin-alias";
-import serve from "rollup-plugin-serve";
+import babel from "rollup-plugin-babel";
+import commonjs from "rollup-plugin-commonjs";
+import filesize from "rollup-plugin-filesize";
 import json from "rollup-plugin-json";
 import nodeBuiltins from "rollup-plugin-node-builtins";
-import nodeResolve from "rollup-plugin-node-resolve";
 import nodeGlobals from "rollup-plugin-node-globals";
-import { uglify } from "rollup-plugin-uglify";
-import babel from "rollup-plugin-babel";
-import filesize from "rollup-plugin-filesize";
-import commonjs from "rollup-plugin-commonjs";
-import replace from "rollup-plugin-replace";
+import nodeResolve from "rollup-plugin-node-resolve";
 import postcss from "rollup-plugin-postcss";
+import replace from "rollup-plugin-replace";
+import serve from "rollup-plugin-serve";
+import typescript from "rollup-plugin-typescript";
+import { uglify } from "rollup-plugin-uglify";
 
 const env = process.env.NODE_ENV;
-const standalone = process.env.STANDALONE == "true";
+const standalone = process.env.STANDALONE === "true";
 const config = {
-  plugins: [postcss()],
+  plugins: [typescript(), postcss()],
   watch: {
-    include: "src/**",
-    chokidar: true
+    chokidar: true,
+    include: "src/**"
   }
 };
 
 if (standalone) {
-  config.input = resolve("src", "standalone.jsx");
+  config.input = resolve("src", "standalone.tsx");
   config.output = {
     format: "iife"
   };
@@ -46,7 +47,7 @@ if (standalone) {
     config.plugins.push(uglify());
   }
 } else {
-  config.input = resolve("src", "index.jsx");
+  config.input = resolve("src", "index.tsx");
   config.output = {
     format: "cjs"
   };
@@ -55,7 +56,6 @@ if (standalone) {
     "react-dom",
     "jrnl-parse",
     "slugify",
-    "prop-types",
     "remark",
     "remark-ping",
     "remark-rehype",
@@ -67,10 +67,10 @@ if (standalone) {
 
 config.plugins.push(
   babel({
+    exclude: ["**/*.json"],
     // Needed for rollup: https://rollupjs.org/guide/en#babel
     // NOTE: this gets merged with .babelrc
-    plugins: ["external-helpers"],
-    exclude: ["**/*.json"]
+    plugins: ["external-helpers"]
   }),
   nodeBuiltins(),
   nodeGlobals(),
