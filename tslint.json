@@ -1,0 +1,8 @@
+{
+  "extends": ["tslint:latest", "tslint-config-prettier", "tslint-react"],
+  "rules": {
+    "jsx-no-multiline-js": false,
+    "no-implicit-dependencies": [true, "dev"],
+    "no-submodule-imports": false
+  }
+}

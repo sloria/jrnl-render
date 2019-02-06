@@ -1,13 +1,17 @@
+import rehypeHighlight from "rehype-highlight";
+import rehypeStringify from "rehype-stringify";
 import remark from "remark";
 import remarkPing from "remark-ping";
 import remarkRehype from "remark-rehype";
-import rehypeStringify from "rehype-stringify";
-import rehypeHighlight from "rehype-highlight";
 
+interface IOptions {
+  simple?: boolean;
+  tagURL?: null | ((tag: string) => string);
+}
 export default function renderMarkdown(
-  source,
-  { simple = false, tagURL = null } = {}
-) {
+  source: string,
+  { simple = false, tagURL = null }: IOptions = {}
+): string {
   // If simple is true, don't use remark-ping
   const plugins = (simple
     ? []

@@ -1,26 +1,20 @@
-import React from "react";
-import t from "prop-types";
-
-import Entry from "./Entry.jsx";
-import { slugifyEntry } from "./utils";
 import parse from "jrnl-parse";
-import Markdown from "./Markdown.jsx";
+import * as React from "react";
+import Entry from "./Entry";
+import Markdown from "./Markdown";
+import { slugifyEntry } from "./utils";
 
-const Empty = ({ children }) => (
-  <div className="Empty tc mt5 mh5 mt6-l mh6-l code gray vh-75">{children}</div>
+const Empty = (props: { children?: React.ReactNode }) => (
+  <div className="Empty tc mt5 mh5 mt6-l mh6-l code gray vh-75">
+    {props.children}
+  </div>
 );
-Empty.propTypes = {
-  children: t.node
-};
 
-const Loader = ({ message }) => (
+const Loader = ({ message }: { message: string }) => (
   <div className="Loader tc mt5 mh5 mt6-l mh6-l code gray vh-75">
     <Markdown source={message || "Loading entries…"} simple={true} />
   </div>
 );
-Loader.propTypes = {
-  message: t.string
-};
 
 const SearchInput = props => (
   <input
@@ -29,7 +23,7 @@ const SearchInput = props => (
   />
 );
 
-const Footer = ({ copyright }) => (
+const Footer = ({ copyright }: { copyright: string }) => (
   <footer className="Footer pv4 ph3 ph5-m ph6-l mid-gray">
     {copyright && (
       <small className="Footer-copyright u-markdown f6 db tc">
@@ -61,11 +55,13 @@ const Footer = ({ copyright }) => (
     </div>
   </footer>
 );
-Footer.propTypes = {
-  copyright: t.string
-};
 
-const Header = ({ title, onInputChange, filter }) => (
+interface IHeaderProps {
+  title: string;
+  onInputChange: (e: Event) => void;
+  filter: string;
+}
+const Header = ({ title, onInputChange, filter }: IHeaderProps) => (
   <header className="Header flex mt4 mb3 mw8 center">
     <h2 className="Header-brand f4 mv0 pv2 ph3 ph0-l">
       <a className="no-underline hover-dark-pink near-black" href="/">
@@ -75,7 +71,7 @@ const Header = ({ title, onInputChange, filter }) => (
     <div className="flex-auto" />
     <div className="Header-search tc lh-title flex mb1">
       <SearchInput
-        autoFocus
+        autoFocus={true}
         placeholder="Search..."
         onChange={onInputChange}
         value={filter}
@@ -83,12 +79,17 @@ const Header = ({ title, onInputChange, filter }) => (
     </div>
   </header>
 );
-Header.propTypes = {
-  title: t.string,
-  onInputChange: t.func,
-  filter: t.string
-};
 
+interface IJRNLProps {
+  title: string | null;
+  source: string;
+  loaded: boolean | null;
+  filter: string;
+  onInputChange: (e: Event) => void;
+  onClickTag: (e: Event) => void;
+  copyright: string | null;
+  loadingMessage: string | null;
+}
 const JRNL = ({
   title,
   source,
@@ -98,7 +99,7 @@ const JRNL = ({
   filter,
   onInputChange,
   onClickTag
-}) => {
+}: IJRNLProps) => {
   const parsed = source ? parse(source) : [];
   // Show entries in reverse chronological order
   let entries = parsed.reverse();
@@ -113,7 +114,7 @@ const JRNL = ({
       const filterTokens = filter.split(/\s+/);
       const entryLower = `${entry.title}\n${entry.body}`.toLowerCase();
       for (const token of filterTokens) {
-        if (!entryLower.includes(token)) {
+        if (entryLower.indexOf(token) < 0) {
           return false;
         }
       }
@@ -123,10 +124,14 @@ const JRNL = ({
   }
   return (
     <div className="App mw7 center sans-serif near-black">
-      <Header title={title} onInputChange={onInputChange} filter={filter} />
+      <Header
+        title={title || ""}
+        onInputChange={onInputChange}
+        filter={filter}
+      />
       <section className="min-vh-75">
         {loaded === false ? (
-          <Loader message={loadingMessage} />
+          <Loader message={loadingMessage || ""} />
         ) : loaded === null ? (
           <Empty />
         ) : entries.length ? (
@@ -139,19 +144,9 @@ const JRNL = ({
           </Empty>
         )}
       </section>
-      <Footer copyright={copyright} />
+      <Footer copyright={copyright || ""} />
     </div>
   );
-};
-JRNL.propTypes = {
-  title: t.string,
-  source: t.string,
-  loaded: t.bool,
-  filter: t.string,
-  onInputChange: t.func,
-  onClickTag: t.func,
-  copyright: t.string,
-  loadingMessage: t.string
 };
 JRNL.defaultProps = {
   loaded: true

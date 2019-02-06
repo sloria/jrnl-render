@@ -1,30 +1,42 @@
-import React from "react";
-import t from "prop-types";
+import * as React from "react";
 
-import getQueryParam from "./get-query-param";
-import { delayedLoader } from "./utils";
 import fetchTxt from "./fetch-txt";
-import JRNL from "./JRNL.jsx";
+import getQueryParam from "./get-query-param";
+import JRNL from "./JRNL";
+import { delayedLoader } from "./utils";
 
-class App extends React.Component {
+interface IAppProps {
+  url: string;
+  source: string | null;
+  title: string | null;
+  copyright: string | null;
+  loadingMessage: string | null;
+}
+interface IAppState {
+  loaded: boolean | null;
+  source: string;
+  filter: string;
+}
+
+class App extends React.Component<IAppProps, IAppState> {
   constructor(props) {
     super(props);
     this.state = {
       // TODO: Error state
+      filter: "",
       loaded: null,
-      source: null,
-      filter: ""
+      source: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClickTag = this.handleClickTag.bind(this);
   }
-  handleInputChange(e) {
+  public handleInputChange(e) {
     this.setState({ filter: e.target.value });
   }
-  handleClickTag(tag) {
+  public handleClickTag(tag) {
     this.setState({ filter: tag });
   }
-  componentDidMount() {
+  public componentDidMount() {
     const filter = getQueryParam("q") || "";
     // Try to guess if a URL was passed
     if (this.props.url) {
@@ -51,7 +63,7 @@ class App extends React.Component {
       this.setState({ source: this.props.source });
     }
   }
-  render() {
+  public render() {
     return (
       <JRNL
         loaded={this.state.loaded}
@@ -66,12 +78,4 @@ class App extends React.Component {
     );
   }
 }
-App.propTypes = {
-  url: t.string,
-  source: t.string,
-  title: t.string,
-  copyright: t.string,
-  loadingMessage: t.string
-};
-
 export default App;

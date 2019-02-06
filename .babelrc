@@ -9,12 +9,7 @@
     "react"
   ],
   "plugins": [
-    "transform-object-rest-spread",
-    // Needed for instanceof to work with Error subclasses
-    // https://stackoverflow.com/a/33877501/1157536
-    ["babel-plugin-transform-builtin-extend", {
-        globals: ["Error"]
-    }]
+    "transform-object-rest-spread"
   ],
   // Overrides for Jest
   // Jest runs in node, so transpile
