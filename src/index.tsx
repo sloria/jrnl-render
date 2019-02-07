@@ -27,8 +27,6 @@ class App extends React.Component<IAppProps, IAppState> {
       loaded: null,
       source: ""
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleClickTag = this.handleClickTag.bind(this);
   }
   public componentDidMount() {
     const filter = getQueryParam("q") || "";
@@ -71,11 +69,11 @@ class App extends React.Component<IAppProps, IAppState> {
       />
     );
   }
-  private handleInputChange(e: React.FormEvent<HTMLInputElement>) {
+  private handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     this.setState({ filter: e.currentTarget.value });
-  }
-  private handleClickTag(tag: string) {
+  };
+  private handleClickTag = (tag: string) => {
     this.setState({ filter: tag });
-  }
+  };
 }
 export default App;
