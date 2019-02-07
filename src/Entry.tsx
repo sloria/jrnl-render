@@ -43,11 +43,11 @@ const Entry = ({ entry }: IEntryProps) => {
     <EntryContainer slug={entry.slug} date={entry.date}>
       <h1 className="Entry-title f4 f3-l fw7 mt0 lh-title">
         <a className="near-black no-underline" href={`#${entry.slug}`}>
-          {entry.title}
-        </a>{" "}
-        <span className="Permalink silver">
-          <LinkIcon style={{ verticalAlign: "middle" }} />
-        </span>
+          {entry.title + " "}
+          <span className="Permalink silver">
+            <LinkIcon style={{ verticalAlign: "middle" }} />
+          </span>
+        </a>
       </h1>
       <EntryBody body={entry.body} />
     </EntryContainer>

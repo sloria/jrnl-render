@@ -96,9 +96,13 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,css,md}": [
+    "*.{js,jsx,ts,tsx}": [
       "prettier --write",
       "tslint --fix",
+      "git add"
+    ],
+    "*.{css,md}": [
+      "prettier --write",
       "git add"
     ]
   },

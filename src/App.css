@@ -23,6 +23,6 @@
   visibility: hidden;
 }
 
-.Entry-title a:hover ~ .Permalink {
+.Entry-title:hover .Permalink {
   visibility: visible;
 }
