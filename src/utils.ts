@@ -21,6 +21,7 @@ function TimeoutError() {
 
 const timeout = (ms: number): Promise<any> =>
   new Promise((resolve, reject) => {
+    // @ts-ignore
     window.setTimeout(() => reject(new TimeoutError()), ms);
   });
 

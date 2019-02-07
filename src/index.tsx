@@ -19,7 +19,7 @@ interface IAppState {
 }
 
 class App extends React.Component<IAppProps, IAppState> {
-  constructor(props) {
+  constructor(props: IAppProps) {
     super(props);
     this.state = {
       // TODO: Error state
@@ -29,12 +29,6 @@ class App extends React.Component<IAppProps, IAppState> {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClickTag = this.handleClickTag.bind(this);
-  }
-  public handleInputChange(e) {
-    this.setState({ filter: e.target.value });
-  }
-  public handleClickTag(tag) {
-    this.setState({ filter: tag });
   }
   public componentDidMount() {
     const filter = getQueryParam("q") || "";
@@ -76,6 +70,12 @@ class App extends React.Component<IAppProps, IAppState> {
         onClickTag={this.handleClickTag}
       />
     );
+  }
+  private handleInputChange(e: React.FormEvent<HTMLInputElement>) {
+    this.setState({ filter: e.currentTarget.value });
+  }
+  private handleClickTag(tag: string) {
+    this.setState({ filter: tag });
   }
 }
 export default App;

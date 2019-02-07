@@ -1,7 +1,12 @@
+// @ts-ignore
 import rehypeHighlight from "rehype-highlight";
+// @ts-ignore
 import rehypeStringify from "rehype-stringify";
+// @ts-ignore
 import remark from "remark";
+// @ts-ignore
 import remarkPing from "remark-ping";
+// @ts-ignore
 import remarkRehype from "remark-rehype";
 
 interface IOptions {

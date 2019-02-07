@@ -18,7 +18,7 @@
     "test": "npm run lint && jest",
     "format": "prettier --write src/**/* && tslint --fix --project .",
     "release": "np",
-    "lint": "tslint --project .",
+    "lint": "tsc --noEmit && tslint --project .",
     "dev": "npm run clean && NODE_ENV=development STANDALONE=true SERVE=true rollup -c --watch -o dist/jrnl-render.standalone.js"
   },
   "files": [

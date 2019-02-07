@@ -1,5 +1,7 @@
+// @ts-ignore
 import parse from "jrnl-parse";
 import * as React from "react";
+import { IEntry } from "./constants";
 import Entry from "./Entry";
 import Markdown from "./Markdown";
 import { slugifyEntry } from "./utils";
@@ -16,7 +18,7 @@ const Loader = ({ message }: { message: string }) => (
   </div>
 );
 
-const SearchInput = props => (
+const SearchInput = (props: React.InputHTMLAttributes<any>) => (
   <input
     className="Search code f7 input-reset pa2 br2 ba b--black-20 bg-white hover-dark-blue"
     {...props}
@@ -58,7 +60,7 @@ const Footer = ({ copyright }: { copyright: string }) => (
 
 interface IHeaderProps {
   title: string;
-  onInputChange: (e: Event) => void;
+  onInputChange: (e: React.FormEvent<HTMLInputElement>) => void;
   filter: string;
 }
 const Header = ({ title, onInputChange, filter }: IHeaderProps) => (
@@ -80,13 +82,13 @@ const Header = ({ title, onInputChange, filter }: IHeaderProps) => (
   </header>
 );
 
-interface IJRNLProps {
+export interface IJRNLProps {
   title: string | null;
   source: string;
   loaded: boolean | null;
   filter: string;
-  onInputChange: (e: Event) => void;
-  onClickTag: (e: Event) => void;
+  onInputChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  onClickTag: (tag: string) => void;
   copyright: string | null;
   loadingMessage: string | null;
 }
@@ -104,13 +106,13 @@ const JRNL = ({
   // Show entries in reverse chronological order
   let entries = parsed.reverse();
   // Add slug field to each entry
-  entries.forEach(entry => {
+  entries.forEach((entry: IEntry) => {
     entry.slug = slugifyEntry(entry);
   });
   if (filter) {
     // Naive search. If all tokens are in the
     // title+body, it's a hit
-    const entryFilter = entry => {
+    const entryFilter = (entry: IEntry) => {
       const filterTokens = filter.split(/\s+/);
       const entryLower = `${entry.title}\n${entry.body}`.toLowerCase();
       for (const token of filterTokens) {
@@ -135,7 +137,7 @@ const JRNL = ({
         ) : loaded === null ? (
           <Empty />
         ) : entries.length ? (
-          entries.map(entry => (
+          entries.map((entry: IEntry) => (
             <Entry key={entry.slug} entry={entry} onClickTag={onClickTag} />
           ))
         ) : (

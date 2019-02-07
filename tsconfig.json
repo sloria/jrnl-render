@@ -7,7 +7,8 @@
     "jsx": "react",
     "target": "es5",
     "lib": ["es2015", "dom"],
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "noImplicitAny": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

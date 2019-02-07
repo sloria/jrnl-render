@@ -36,7 +36,7 @@ const EntryContainer = ({ slug, date, children }: IEntryContainerProps) => (
 
 interface IEntryProps {
   entry: IEntry;
-  onClickTag: (e: Event) => void;
+  onClickTag: (tag: string) => void;
 }
 const Entry = ({ entry }: IEntryProps) => {
   return (

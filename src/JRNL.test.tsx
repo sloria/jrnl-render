@@ -4,11 +4,11 @@ import { resolve } from "path";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import JRNL from "./JRNL";
+import JRNL, { IJRNLProps } from "./JRNL";
 
 describe("JRNL", () => {
   let src;
-  let props;
+  let props: IJRNLProps;
   beforeAll(() => {
     src = fs.readFileSync(
       resolve(__dirname, "..", "example", "jrnl.txt"),
@@ -19,8 +19,8 @@ describe("JRNL", () => {
       filter: "",
       loaded: true,
       loadingMessage: null,
-      onClickTag: e => null,
-      onInputChange: e => null,
+      onClickTag: (t: string) => null,
+      onInputChange: (e: React.FormEvent<HTMLInputElement>) => null,
       source: src,
       title: ""
     };
