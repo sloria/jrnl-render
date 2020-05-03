@@ -1,7 +1,7 @@
 # jrnl-render
 
 [![Current Version](https://img.shields.io/npm/v/jrnl-render.svg)](https://www.npmjs.org/package/jrnl-render)
-[![Build Status](https://travis-ci.org/sloria/jrnl-render.svg?branch=master)](https://travis-ci.org/sloria/jrnl-render)
+![CI](https://github.com/sloria/jrnl-render/workflows/CI/badge.svg)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&identifier=142367266)](https://dependabot.com)
 
