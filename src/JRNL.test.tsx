@@ -1,8 +1,8 @@
 import { render } from "enzyme";
 import * as fs from "fs";
 import { resolve } from "path";
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 
 import JRNL, { IJRNLProps } from "./JRNL";
 

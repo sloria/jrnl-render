@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 import fetchTxt from "./fetch-txt";
 import getQueryParam from "./get-query-param";
@@ -76,4 +76,5 @@ class App extends React.Component<IAppProps, IAppState> {
     this.setState({ filter: tag });
   };
 }
+
 export default App;

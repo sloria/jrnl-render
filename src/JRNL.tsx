@@ -1,6 +1,6 @@
 // @ts-ignore
 import parse from "jrnl-parse";
-import * as React from "react";
+import React from "react";
 import { IEntry } from "./constants";
 import Entry from "./Entry";
 import Markdown from "./Markdown";

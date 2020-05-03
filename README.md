@@ -44,7 +44,10 @@ Customize title:
 Optional copyright in footer (supports Markdown):
 
 ```html
-<jrnl copyright="Copyright 2018 by [Steven Loria](https://stevenloria.com)" src="..." />
+<jrnl
+  copyright="Copyright 2020 by [Steven Loria](https://stevenloria.com)"
+  src="..."
+/>
 ```
 
 Custom loading message (supports Markdown):
@@ -65,20 +68,20 @@ import JRNL from "jrnl-render";
 <JRNL
   src="..."
   title="My Journal"
-  copyright="Copyright 2018 by Steven Loria"
-  />
+  copyright="Copyright 2020 by Steven Loria"
+/>;
 ```
 
 ## Developing
 
-* `npm install`
-* To run tests: `npm test`
-* To run tests in watch mode: `npm test -- --watch`
+- `npm install`
+- To run tests: `npm test`
+- To run tests in watch mode: `npm test -- --watch`
 
 ## Related
 
-* [jrnl-parse](https://github.com/sloria/jrnl-parse) - Parse a jrnl file
-    in Node.js or the browser.
+- [jrnl-parse](https://github.com/sloria/jrnl-parse) - Parse a jrnl file
+  in Node.js or the browser.
 
 ## License
 

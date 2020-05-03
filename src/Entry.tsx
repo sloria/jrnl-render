@@ -1,6 +1,7 @@
-import * as React from "react";
+import React from "react";
 
-import { IoMdLink as LinkIcon } from "react-icons/io";
+// TODO: Get react-icons imports working again
+// import { IoMdLink as LinkIcon } from "react-icons/io";
 import { IEntry } from "./constants";
 import Markdown from "./Markdown";
 import { formatDate } from "./utils";
@@ -45,7 +46,7 @@ const Entry = ({ entry }: IEntryProps) => {
         <a className="near-black no-underline" href={`#${entry.slug}`}>
           {entry.title + " "}
           <span className="Permalink silver">
-            <LinkIcon style={{ verticalAlign: "middle" }} />
+            {/* <LinkIcon style={{ verticalAlign: "middle" }} /> */}
           </span>
         </a>
       </h1>

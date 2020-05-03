@@ -1,6 +1,6 @@
 import "highlight.js/styles/github.css";
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 import "tachyons";
 import "./App.css";
 import App from "./index";
