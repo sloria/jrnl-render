@@ -1,6 +1,6 @@
 {
   "name": "jrnl-render",
-  "version": "4.4.1",
+  "version": "5.0.0",
   "description": "Render a jrnl (jrnl.sh) file as a webpage.",
   "browser": "dist/jrnl-render.standalone.js",
   "unpkg": "dist/jrnl-render.standalone.min.js",
