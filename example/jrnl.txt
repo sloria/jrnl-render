@@ -1,5 +1,4 @@
-2020-05-23 02:12 Usage as a React component
-
+[2020-05-23 02:12] Usage as a React component
 You can use jrnl-render as a @react component.
 
 ```javascript
@@ -14,8 +13,7 @@ import JRNL from "jrnl-render";
 
 @javascript
 
-2020-05-02 10:12 Customizing jrnl-render
-
+[2020-05-02 10:12] Customizing jrnl-render
 Customize title:
 
 ```html
@@ -37,8 +35,7 @@ Custom loading message (supports Markdown):
 For more docs, see the [README](https://github.com/sloria/jrnl-render#jrnl-render).
 
 
-2020-05-01 09:42 Setting up jrnl-render
-
+[2020-05-01 09:42] Setting up jrnl-render
 Just create an HTML file with a `<jrnl>` tag and include the 
 standalone `jrnl-render` script:
 
@@ -59,8 +56,7 @@ standalone `jrnl-render` script:
 
 That's it!
 
-2020-05-02 15:30 What is jrnl-render?
-
+[2020-05-02 15:30] What is jrnl-render?
 jrnl-render is a JavaScript file that renders your jrnl files to
 a webpage.
 
@@ -70,8 +66,7 @@ a webpage.
 * Syntax highlighting
 
 
-2020-08-10 03:22 What is jrnl?
-
+[2020-08-10 03:22] What is jrnl?
 jrnl is a simple journal application for your command line. Journals are stored as human readable plain text files - you can put them into a Dropbox folder for instant syncing and you can be assured that your journal will still be readable in 2050, when all your fancy iPad journal applications will long be forgotten.
 
 Check out http://jrnl.sh/
