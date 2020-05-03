@@ -6,9 +6,10 @@
     "module": "esnext",
     "jsx": "react",
     "target": "es5",
-    "lib": ["es2015", "dom"],
+    "lib": ["es2017", "dom"],
     "moduleResolution": "node",
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "skipLibCheck": true /* This trusts that typings files (@types) are accurate and don't need to be checked by the compiler. This speeds build times. */
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
